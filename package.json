@@ -8,7 +8,11 @@
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
-    "build": "grunt"
+    "build": "grunt",
+    "metalsmith": "node metalsmith.js",
+    "watch": "nodemon --watch src --watch layouts --watch metalsmith.js -e ejs,js,css,html --ignore build/ metalsmith.js",
+    "verbose": "DEBUG=metalsmith-* node metalsmith.js",
+    "debug": "node --inspect metalsmith.js"
   },
   "author": {
     "name": "Hakim El Hattab",
@@ -33,11 +37,18 @@
     "grunt-contrib-qunit": "~1.2.0",
     "grunt-contrib-uglify": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-sass": "^2.0.0",
     "grunt-retire": "^1.0.7",
+    "grunt-sass": "^2.0.0",
     "grunt-zip": "~0.17.1",
     "mustache": "^2.3.0",
+    "nodemon": "^1.17.3",
     "socket.io": "^1.7.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jstransformer-ejs": "^0.2.0",
+    "metalsmith": "^2.3.0",
+    "metalsmith-layouts": "^2.1.0",
+    "metalsmith-markdown": "^0.2.2"
+  }
 }
