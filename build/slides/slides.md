@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-  <h1>MAIN</h1>
-  <section><h1 id="regex-101">Regex 101</h1>
+<section><h1 id="regex-101">Regex 101</h1>
 <p style="text-align: center;">Henry Marshall (@henry)</p>
 <p style="text-align: center;">2018-04-09</p></section>
 <section><section><h2 id="simple-string-replacement">Simple String Replacement</h2>
@@ -361,5 +353,3 @@ regex engine in your browser. It&#39;s how I build all my non-trivial regex!</li
 <li>Join #protip on Slack!</li>
 </ul>
 </section></section>
-</body>
-</html>

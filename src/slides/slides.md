@@ -1,7 +1,9 @@
-----
-
-
-----
+---
+data-separator: "^={4,}$"
+data-separator-vertical: "^-{4,}"
+data-separator-notes: "^Notes?:"
+data-charset: "utf-8"
+---
 
 # Regex 101
 
