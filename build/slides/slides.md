@@ -37,7 +37,7 @@ foo1
 foo_
 </code></pre>
 </section></section>
-<section><section><h1 id="character-class">Character Class</h1>
+<section><section><h2 id="character-class">Character Class</h2>
 <p>My grandma has a cat.
 My grandpa has a dog.</p>
 <p><code>%s/grand[mp]a/family/</code></p>
@@ -100,7 +100,7 @@ My family has a dog.</p>
 </tbody>
 </table>
 </section></section>
-<section><section><h1 id="metacharacters">Metacharacters</h1>
+<section><section><h2 id="metacharacters">Metacharacters</h2>
 <p>There are 12 characters with a special meaning:</p>
 <pre><code class="lang-plaintext">\ ^ $ . | ? * + ( ) [ {
 </code></pre>
@@ -181,7 +181,7 @@ isFiveNines(terribleUptime) // true - oh no!
 </code></pre>
 <p>Note: Can anyone tell me why I didn&#39;t used <code>\w+</code></p>
 </section></section>
-<section><section><h1 id="groups">Groups</h1>
+<section><section><h2 id="groups">Groups</h2>
 <p>Treating a sequence as a single atomic unit.</p>
 <pre><code class="lang-js">const isTheme = str =&gt; /(na)+ batman/i.test(str)
 isTheme(&quot;nanananananana Batman!&quot;)     // true
@@ -301,7 +301,7 @@ extract_comment.match(contains_comment)[1].strip
 <p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
 </section>
 <section><h2 id="parsing-html"><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags">Parsing HTML</a></h2>
-<p><img src="/images/parsing_html_with_regex.jpg" alt="Book Cover"></p>
+<p><img src="images/parsing_html_with_regex.png" alt="Book Cover"></p>
 </section>
 <section><h2 id="flavors-of-regex">Flavors of Regex</h2>
 <ul>
@@ -330,17 +330,17 @@ while (matches = /ba(\w)/.exec(&quot;bar baz&quot;)) {
 }
 </code></pre>
 </section></section>
-<section><section><h1 id="next-steps">Next Steps</h1>
+<section><section><h2 id="next-steps">Next Steps</h2>
 <ul>
 <li><a href="https://www.regular-expressions.info/lookaround.html">Lookarounds</a></li>
 <li><a href="https://www.regular-expressions.info/repeat.html">Laziness</a></li>
 </ul>
 </section>
 <section><h2 id="regex-crosswords">Regex Crosswords</h2>
-<p><img src="/images/crossword.png" alt="Crossword Screenshot"></p>
+<p><img src="images/crossword.png" alt="Crossword Screenshot"></p>
 </section>
 <section><h2 id="regex-golf"><a href="https://www.oreilly.com/learning/regex-golf-with-peter-norvig">Regex Golf</a></h2>
-<p><img src="/images/regex_golf.png" alt="XKCD 1313"></p>
+<p><img src="images/regex_golf.png" alt="XKCD 1313"></p>
 </section>
 <section><h2 id="resources">Resources</h2>
 <ul>

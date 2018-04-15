@@ -10,7 +10,7 @@
     "start": "grunt serve",
     "build": "grunt",
     "metalsmith": "node metalsmith.js",
-    "watch": "nodemon --watch src --watch layouts --watch metalsmith.js -e ejs,js,css,html --ignore build/ metalsmith.js",
+    "watch": "nodemon --watch src --watch layouts --watch metalsmith.js -e ejs,js,css,html,md --ignore build/ metalsmith.js",
     "verbose": "DEBUG=metalsmith-* node metalsmith.js",
     "debug": "node --inspect metalsmith.js"
   },
@@ -47,7 +47,9 @@
   "license": "MIT",
   "dependencies": {
     "jstransformer-ejs": "^0.2.0",
+    "marked": "^0.3.19",
     "metalsmith": "^2.3.0",
+    "metalsmith-branch": "0.0.5",
     "metalsmith-copy": "^0.4.0",
     "metalsmith-layouts": "^2.1.0",
     "ramda": "^0.25.0"

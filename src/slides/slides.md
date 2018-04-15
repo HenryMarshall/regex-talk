@@ -1,4 +1,7 @@
 ---
+title: "Intro to Regular Expressions"
+author: "Henry Marshall"
+
 data-separator: "^={4,}$"
 data-separator-vertical: "^-{4,}"
 data-separator-notes: "^Notes?:"
@@ -77,7 +80,7 @@ foo_
 
 ==========
 
-# Character Class
+## Character Class
 
 My grandma has a cat.
 My grandpa has a dog.
@@ -118,7 +121,7 @@ const isNotVowel = str => /[^aeiou]/.test(str)
 
 ==========
 
-# Metacharacters
+## Metacharacters
 
 There are 12 characters with a special meaning:
 
@@ -191,7 +194,7 @@ Note: Can anyone tell me why I didn't used `\w+`
 
 ==========
 
-# Groups
+## Groups
 
 Treating a sequence as a single atomic unit.
 
@@ -329,7 +332,7 @@ This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L61
 
 ## [Parsing HTML](https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags)
 
-![Book Cover](/images/parsing_html_with_regex.jpg)
+![Book Cover](images/parsing_html_with_regex.png)
 
 
 ----------
@@ -364,7 +367,7 @@ while (matches = /ba(\w)/.exec("bar baz")) {
 
 ==========
 
-# Next Steps
+## Next Steps
 
 - [Lookarounds](https://www.regular-expressions.info/lookaround.html)
 - [Laziness](https://www.regular-expressions.info/repeat.html)
@@ -374,13 +377,13 @@ while (matches = /ba(\w)/.exec("bar baz")) {
 
 ## Regex Crosswords
 
-![Crossword Screenshot](/images/crossword.png)
+![Crossword Screenshot](images/crossword.png)
 
 ----------
 
 ## [Regex Golf](https://www.oreilly.com/learning/regex-golf-with-peter-norvig)
 
-![XKCD 1313](/images/regex_golf.png)
+![XKCD 1313](images/regex_golf.png)
 
 
 ----------

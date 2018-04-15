@@ -1,4 +1,5 @@
 const Metalsmith = require("metalsmith")
+const branch = require("metalsmith-branch")
 const layouts = require("metalsmith-layouts")
 const copy = require("metalsmith-copy")
 
@@ -10,6 +11,7 @@ const converter = options => (files, metalsmith, done) => {
   R.forEachObjIndexed(file => {
     const markdown = file.contents.toString()
 
+    // Anything wrapped should be converted from MD you already trust.
     const wrap = contents => `<section>${contents}</section>`
 
     const splitSlides = R.pipe(
@@ -49,11 +51,13 @@ Metalsmith(__dirname)
   .source("./src")
   .destination("./build")
   .clean(true)
-  .use(converter())
-  .use(copy({
-    pattern: "**/*.md",
-    extension: ".html",
-  }))
+  .use(branch("**/*.md")
+    .use(converter())
+    .use(copy({
+      pattern: "**/*.md",
+      extension: ".html",
+    }))
+  )
   .use(layouts({
     engine: "ejs",
     pattern: "**/*.html",
