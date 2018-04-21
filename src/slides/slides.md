@@ -2,10 +2,10 @@
 title: "Intro to Regular Expressions"
 author: "Henry Marshall"
 
-data-separator: "^={4,}$"
-data-separator-vertical: "^-{4,}"
-data-separator-notes: "^Notes?:"
-data-charset: "utf-8"
+separator: "^={4,}$"
+separator-vertical: "^-{4,}$"
+separator-notes: "^Notes?:"
+charset: "utf-8"
 ---
 
 # Regex 101
@@ -256,8 +256,9 @@ Note: Backreferences are 1-indexed
 | `$`              | End of the line                                 |
 | `i`              | Case Insensitive                                |
 
-Note: Escaping metacharacters was unnecessary inside char class.
-Not uncommon for regex to reject my personal email.
+Note: 
+- Escaping metacharacters was unnecessary inside char class.
+- Not uncommon for regex to reject my personal email.
 
 ----------
 

@@ -120,8 +120,8 @@ My family has a dog.</p>
 </tr>
 </tbody>
 </table>
-<p>Note: I can (and did) use <code>\d</code> inside another character class!</p>
-</section>
+<aside class='notes'><p>I can (and did) use <code>\d</code> inside another character class!</p>
+</aside></section>
 <section><h2 id="negation">Negation</h2>
 <p>Negate a character class by prepending <code>^</code></p>
 <pre><code class="lang-js">const isNotVowel = str =&gt; /[^aeiou]/.test(str)
@@ -161,12 +161,11 @@ My family has a dog.</p>
 <li><p>In character classes, <em>usually</em> treated literally</p>
 </li>
 </ul>
-<p>Note:</p>
-<ul>
+<aside class='notes'><ul>
 <li><code>?</code> and <code>^</code> are the most context dependent.</li>
 <li>You <em>may</em> escape in character classes.</li>
 </ul>
-</section>
+</aside></section>
 <section><h2 id="checking-uptime">Checking Uptime</h2>
 <pre><code class="lang-js">const isFiveNines = str =&gt; /99\.999/.test(str)
 
@@ -223,13 +222,13 @@ isFiveNines(terribleUptime) // true - oh no!
 </tr>
 </tbody>
 </table>
-<p>Note: Omitting the first and second numbers implicitly means 0 and infinite respectively.</p>
-</section>
+<aside class='notes'><p>Omitting the first and second numbers implicitly means 0 and infinite respectively.</p>
+</aside></section>
 <section><h2 id="matching-account-ids">Matching Account IDs</h2>
 <pre><code class="lang-js">const isChargeId = str =&gt; /acct_[a-zA-Z0-9]{16,}/.test(str)
 </code></pre>
-<p>Note: Can anyone tell me why I didn&#39;t used <code>\w+</code></p>
-</section></section>
+<aside class='notes'><p>Can anyone tell me why I didn&#39;t used <code>\w+</code></p>
+</aside></section></section>
 <section><section><h2 id="groups">Groups</h2>
 <p>Treating a sequence as a single atomic unit.</p>
 <pre><code class="lang-js">const isTheme = str =&gt; /(na)+ batman/i.test(str)
@@ -253,8 +252,8 @@ getPercentage(str)[1]       // &quot;2.9&quot;
 <p>My brother has a goldfish.</p>
 <p><code>%s/(brother|sister)/step-\1/</code></p>
 <p>My step-brother has a goldfish.</p>
-<p>Note: Backreferences are 1-indexed</p>
-</section></section>
+<aside class='notes'><p>Backreferences are 1-indexed</p>
+</aside></section></section>
 <section><section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
 <pre><code class="lang-plaintext">/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 </code></pre>
@@ -300,9 +299,11 @@ getPercentage(str)[1]       // &quot;2.9&quot;
 </tr>
 </tbody>
 </table>
-<p>Note: Escaping metacharacters was unnecessary inside char class.
-Not uncommon for regex to reject my personal email.</p>
-</section>
+<aside class='notes'><ul>
+<li>Escaping metacharacters was unnecessary inside char class.</li>
+<li>Not uncommon for regex to reject my personal email.</li>
+</ul>
+</aside></section>
 <section><h2 id="ruby-security-vulnerability-">Ruby Security Vulnerability!</h2>
 <pre><code class="lang-ruby">reg = /^\w+(\+\w+)?@\w+\.\w{2,}$/
 reg.match(&quot;foo bar&quot;)
@@ -336,8 +337,8 @@ foobar = &#39;foo: &quot;foo&quot;, bar: &quot;bar&quot;&#39;
 /&quot;(.+)&quot;/.match(foobar)[1]     # =&gt; &quot;foo\&quot;, bar: \&quot;bar&quot;
 /&quot;([^&quot;]+)&quot;/.match(foobar)[1]  # =&gt; &quot;foo&quot;
 </code></pre>
-<p>Note: You can make the regex engine lazy with <code>?</code></p>
-</section>
+<aside class='notes'><p>You can make the regex engine lazy with <code>?</code></p>
+</aside></section>
 <section><h2 id="matching-all-the-things-">Matching All the Things!</h2>
 <pre><code class="lang-ruby">extract_comment = /\/\*([\w\W]+)\*\//
 contains_comment = &quot;this.bit.is.code()
