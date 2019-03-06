@@ -10,96 +10,83 @@ charset: "utf-8"
 
 # Regex 101
 
-<p style="text-align: center;">Henry Marshall (@henry)</p>
-<p style="text-align: center;">2018-04-09</p>
+<p style="text-align: center;">Henry Marshall</p>
+<p style="text-align: center;">SEM.js</p>
+<p style="text-align: center;">2019-03-11</p>
 
 ==========
 
+## Splitting on Lines
 
-## Simple String Replacement
+```javascript
+const unix_str = "foo\nbar"
+unix_str.split("\n")
+// => [ 'foo', 'bar' ]
 
-It would be grand if grandma came over!
-
-```sed
-%s/grand/super/
+const windows_str = "foo\r\nbar"
+windows_str.split("\n")
+// => [ 'foo\r', 'bar' ]
 ```
-
-It would be super if superma came over!
 
 ----------
 
-## A Work Around
+## Repeating Characters
 
-It would be grand if grandma came over!
+| Pattern   | Description             | Matches                      |
+| --------- | ----------------------- | ---------------------------- |
+| `a?`      | One or Zero 'a'         | '' 'a'                       |
+| `a*`      | Zero or More 'a'        | '' 'a' 'aa' 'aaa' 'aaaa'...  |
+| `a+`      | One or More 'a'         | 'a' 'aa' 'aaa' 'aaaa'...     |
+| `a{3}`    | Exactly three 'a'       | 'aaa'                        |
+| `a{2,4}`  | Two to four 'a'         | 'aa' 'aaaa' 'aaaa'           |
 
-```sed
-%s/ grand / super /
-```
-
-It would be super if grandma came over!
-
-----------
-
-## Your First Regex
-
-It would be grand if grandma came over!
-
-If grandma came over that would be grand!
-
-```sed
-%s/grand\b/super/
-```
-
-It would be super if grandma came over!
-
-If grandma came over that would be super!
+Note: Omitting the first and second numbers implicitly means 0 and infinite respectively.
 
 ----------
 
-## What Happened
+## Splitting on Lines
 
-`\b` matches the boundary between a letter, number, or underscore and anything else.
+```javascript
+const windows_str = "foo\r\nbar"
+windows_str.split("\n")
+// => [ 'foo\r', 'bar' ]
 
-`/foo\b/`
-
-Matches:
-```plaintext
-foo.
-foo()
-foo-
-foo bar
-foo
-```
-
-Does *not* Match:
-```plaintext
-foobar
-foo1
-foo_
+windows_str.split(/\r?\n/)
+// => [ 'foo', 'bar' ]
 ```
 
 ==========
 
 ## Character Class
 
-My grandma has a cat.
-My grandpa has a dog.
+```javascript
+const str = "My grandma has a cat. My grandpa has a dog."
+str.replace(/???/g, "family")
+```
 
-`%s/grand[mp]a/family/`
-
-My family has a cat.
-My family has a dog.
+Note: The `g` flag makes the regex global.
 
 ----------
 
+## Character Class
+
+```javascript
+const str = "My grandma has a cat. My grandpa has a dog."
+str.replace(/grand[mp]a/g, "family")
+// => "My family has a cat. My family has a dog."
+```
+
+Note: The `g` flag makes the regex global.
+
+----------
 ## Shorthand Character Class
 
 | Shorthand | Equivalent      |
 | --------- | --------------- |
 | `[0-9]`   | `[0123456789]`  |
 | `\d`      | `[0-9]`         |
+| `\w`      | `[A-Za-z\d_]`   |
 | `\s`      | `[ \t\n\r]`     |
-| `\w`      | `[\A-Za-z\d_]`  |
 
 Note: I can (and did) use `\d` inside another character class!
 
@@ -107,153 +94,242 @@ Note: I can (and did) use `\d` inside another character class!
 
 ## Negation
 
-Negate a character class by prepending `^`
+```js
+const containsNonVowel = str => /???/.test(str)
+containsNonVowel("foo")
+// => true
+```
+
+----------
+
+## Negation
 
 ```js
 const isNotVowel = str => /[^aeiou]/.test(str)
+containsNonVowel("foo")
+// => true
 ```
+
+----------
+
+## Shorthand Negation
 
 | Shorthand | Equivalent |
 | --------- | ---------- |
+| `.`       | `[^\r\n]`  |
 | `\D`      | `[^\d]`    |
 | `\S`      | `[^\s]`    |
 | `\W`      | `[^\w]`    |
 
 ==========
 
-## Metacharacters
+## Crossword
 
-There are 12 characters with a special meaning:
-
-```plaintext
-\ ^ $ . | ? * + ( ) [ {
-```
-
-- Metacharacters are context dependent.
-
-- To match a literal character, escape it with a backslash `\$`.
-
-- In character classes, *usually* treated literally
-
-Note:
-- `?` and `^` are the most context dependent.
-- You *may* escape in character classes.
-
-----------
-
-## Checking Uptime
-
-```js
-const isFiveNines = str => /99\.999/.test(str)
-
-const goodUptime = "99.99939"
-isFiveNines(goodUptime)  // true
-
-const badUptime = "93.990999"
-isFiveNines(badUptime)   // false
-```
-
-In practice you should be comparing floats.
-
-----------
-
-## Incorrect Regex Fail Silently (usually)
-
-```js
-const isFiveNines = str => /99.999/.test(str)
-
-const badUptime = "93.990999"
-isFiveNines(terribleUptime) // true - oh no!
-```
-
-The `.` matches any one character in regex (with the exception of `\n`).
-
-==========
-
-## Repeating Characters
-
-| Pattern | Description             | Matches                      |
-| ------- | ----------------------- | ---------------------------- |
-| a?      | One or Zero 'a'         | '' 'a'                       |
-| a\*     | Zero or More 'a'        | '' 'a' 'aa' 'aaa' 'aaaa'...  |
-| a+      | One or More 'a'         | 'a' 'aa' 'aaa' 'aaaa'...     |
-| a{3}    | Exactly three 'a'       | 'aaa'                        |
-| a{2,4}  | Two to four 'a'         | 'aa' 'aaaa' 'aaaa'           |
-
-Note: Omitting the first and second numbers implicitly means 0 and infinite respectively.
-
-----------
-
-## Matching Account IDs
-
-```js
-const isChargeId = str => /acct_[a-zA-Z0-9]{16,}/.test(str)
-```
-
-Note: Can anyone tell me why I didn't used `\w+`
+TODO
 
 ==========
 
 ## Groups
 
-Treating a sequence as a single atomic unit.
+```js
+const isTheme = str => /???/.test(str)
+isTheme("nanananananana Batman!")
+// => true
+```
+
+----------
+
+## Groups
 
 ```js
-const isTheme = str => /(na)+ batman/i.test(str)
-isTheme("nanananananana Batman!")     // true
+const isTheme = str => /(na)+ Batman/.test(str)
+isTheme("nanananananana Batman!")
+// => true
 ```
 
 ----------
 
 ## Alternation in Groups
 
-My brother has a cat.
-My sister has a dog.
-
-`%s/(brother|sister)/family/`
-
-My family has a cat.
-My family has a dog.
+```javascript
+const str = "My brother has a ferret. My sister has a cat."
+str.replace(/???/g, "family")
+// => "My family has a ferret. My family has a cat."
+```
 
 ----------
 
-## Capture Groups
+## Alternation in Groups
 
-```js
-const str = "Sticker pricing is 2.9% + $0.30 per transaction"
-const getPercentage = str.match(/(100|\d{1,2}(?:\.\d+)?)%/)
-getPercentage(str)[1]       // "2.9"
+```javascript
+const str = "My brother has a ferret. My sister has a cat."
+str.replace(/(brother|sister)/g, "family")
+// => "My family has a ferret. My family has a cat."
 ```
 
 ----------
 
 ## Backreferences
 
-My brother has a goldfish.
-
-`%s/(brother|sister)/step-\1/`
-
-My step-brother has a goldfish.
+```javascript
+const str = "My brother has a ferret."
+str.replace(/???/g, "step-\1")
+// => "My step-brother has a ferret."
+```
 
 Note: Backreferences are 1-indexed
+
+----------
+
+## Backreferences
+
+```javascript
+const str = "My brother has a ferret."
+str.replace(/(brother|sister)/g, "step-\1")
+// => "My step-brother has a ferret."
+```
+
+Note: Backreferences are 1-indexed
+
+----------
+
+## Capture Groups
+
+```js
+const str = "Stripe costs 2.9% + $0.30"
+const reg = /???/
+const getPercentage = str => str.match(reg)[1]
+getPercentage(str)
+// => "2.9"
+```
+
+Note: To include `%`, move it inside the capture group
+
+----------
+
+## Capture Groups
+
+```js
+const str = "Stripe costs 2.9% + $0.30"
+const reg = /(100|\d{1,2}(\.\d+)?)%/
+const getPercentage = str => str.match(reg)[1]
+getPercentage(str)
+// => "2.9"
+```
+
+Note: To include `%`, move it inside the capture group
+
+==========
+
+## JavaScript is Weird
+
+```javascript
+"bar baz".match(/ba\w/)    
+// => [ "bar", index: 0, input: "bar baz",
+//      groups: undefined ]
+"bar baz".match(/ba(\w)/)  
+// => [ "bar", "r", index: 0 input "bar baz", 
+//      groups: undefined ]
+"bar baz".match(/ba\w/g)   // => [ "bar", "baz" ]
+"bar baz".match(/ba(\w)/g) // => [ "bar", "baz" ]
+"bar baz".match(/foo/)     // => null
+"bar baz".match(/foo/g)    // => null
+```
+
+Note: 
+- I hereafter omit `groups: undefined`
+- xRegExp library simplifies this and adds other features
+
+----------
+
+## `.exec` maintains an index
+```javascript
+const allMatches = (reg, str) => {
+  let match
+  const output = []
+  while (match = reg.exec(str)) {
+    output.push(match);
+  }
+  return output
+}
+allMatches(/ba(\w)/g, "bar baz") 
+// => [ [ 'bar', 'r', index: 0, input: 'bar baz' ],
+//      [ 'baz', 'z', index: 4, input: 'bar baz' ] ]
+```
+
+Note: Do *not* define the regex in the while loop or you'll have an infinite loop. It also *must* be a global regex. We'll reuse this function later.
+
+
+==========
+
+## Sometimes `.` is not enough
+
+```javascript
+extract_comment = /\/\*([\w\W]+)\*\//
+contains_comment = `this.bit.is.code()
+/* this is a comment
+this too */
+more.code()`
+contains_comment.match(extract_comment)[1].strip
+// => "this is a comment\nthis too"
+```
+
+This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
+
+----------
+
+## Other times `.` is too much
+
+```javascript
+const foo = 'foo="foo"'
+foo.match(/"(.+)"/g)
+// => [ [ '"foo"', "foo", index: 6, input: 'foo = "foo"' ] ]
+
+const foobar = 'foo="foo",bar="bar"'
+allMatches(/"(.+)"/g, foobar)
+// => [ [ '"foo", bar="bar"','foo", bar="bar', index: 4,
+//      input: 'foo="foo", bar="bar"' ] ]
+
+allMatches(/"([^"]+)"/g, foobar)
+// => [ [ '"foo"', "foo", index: 4, 
+//        input: 'foo="foo",bar="bar"' ],
+//      [ '"bar"', "bar", index: 14, 
+//        input: 'foo="foo",bar="bar"' ] ]
+```
+
+Note: 
+- Think about the interpretter
+- You can make the regex engine lazy with `?`
+
+==========
+
+## Crossword
+
+TODO
 
 ==========
 
 ## Matching Email Addresses
 
-```plaintext
-/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+TODO include tools for other languages
+
+- [Rubular](http://rubular.com) [Ruby]
+
+----------
+
+## Matching Email Addresses
+
+```regex
+/[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i
 ```
 
 | Section          | Meaning                                         |
 | ---------------- | ----------------------------------------------- |
-| `^`              | Start of the line                               |
-| `[A-Z0-9._%+-]+` | 1+ of: letter, number, `.`, `_`, `%`, `+`, `-`  |
+| `[\w.%+-]+`      | 1+ of: letter, number, `.`, `_`, `%`, `+`, `-`  |
 | `@`              | Literal `@`                                     |
 | `[A-Z0-9.-]+`    | 1+ of: letter, number, `.`, `-`                 |
 | `\.`             | Literal `.`                                     |
 | `[A-Z]{2,}`      | Two or more letters                             |
-| `$`              | End of the line                                 |
 | `i`              | Case Insensitive                                |
 
 Note: 
@@ -262,139 +338,173 @@ Note:
 
 ----------
 
-## Ruby Security Vulnerability!
+## Matching the Whole String
 
-```ruby
-reg = /^\w+(\+\w+)?@\w+\.\w{2,}$/
-reg.match("foo bar")
-# => nil
+```javascript
+const codeInjection = 
+  "<script>alert('uh oh')</script>\nfoo@bar.com"
 
-reg.match("foo@bar.com")
-# => <MatchData "foo@bar.com" 1:nil>
+const containsEmail = str => 
+  /[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(str)
+containsEmail(injection) // true
 
-reg.match("<script>alert('uh oh')</script>\nfoo@bar.com")
-# => <MatchData "foo@bar.com" 1:nil>
+const containsOnlyEmail = str =>
+  /^[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(str)
+containsOnlyEmail(injection) // false
+```
+
+Note: Ruby treats as multi-line by default -- use `\A` & `\z`. If you *want* that behavior, use multiline flag `m`.
+
+==========
+
+## `^`'s various meanings
+
+```javascript
+const isFirstCharacterVowel = str => /^[aeiou]/i.test(str)
+const containsNonVowel = str => /[^aeiou]/i
 ```
 
 ----------
 
-## Ruby Safe Regex
+## `?`'s various meanings
 
-Use `\A` (start of string) and `\z` (end of string),
-instead of `^` (start of *line*) and `$` (end of *line*).
-
-```ruby
-safeReg = /\A\w+(\+\w+)?@\w+\.\w{2,}\z/
-
-reg.match("foo@bar.com")
-# => <MatchData "foo@bar.com" 1:nil>
-
-reg.match("<script>alert('uh oh')</script>\nfoo@bar.com")
-# => nil
+```javascript
+const optionalPercent = /\d+%?/
+const nonCapturingGroup = /(100|\d{1,2}(?:\.\d+)?)%/
+const lazyInterpretter = /"(.+?)"/
 ```
-
-The linter has got your back.
-
 
 ----------
 
-## Match only what you need
+## Metacharacters
 
-```ruby
-foo = 'foo: "foo"'
-/"(.+)"/.match(config)[1]     # => "foo"
-
-foobar = 'foo: "foo", bar: "bar"'
-/"(.+)"/.match(foobar)[1]     # => "foo\", bar: \"bar"
-/"([^"]+)"/.match(foobar)[1]  # => "foo"
+```plaintext
+\ ^ $ . | ? * + ( ) [ ] { }
 ```
 
-Note: You can make the regex engine lazy with `?`
-
+Note:
+- Over-escaping not a problem
+- You *may* escape in character classes.
 
 ----------
 
-## Matching All the Things!
+## Regex Often Fail Silently
 
-```ruby
-extract_comment = /\/\*([\w\W]+)\*\//
-contains_comment = "this.bit.is.code()
-/* this is a comment
-this too */
-more.code()"
-extract_comment.match(contains_comment)[1].strip
-# => "this is a comment\nthis too"
+```javascript
+const reg = /[abc]{2}[xyz]/
+reg.test("cbz")     // true
+reg.test("axx")     // false
+reg.test("a")       // false
+
+const typo = /[abc}{2}[xyz]/
 ```
-
-This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
-
 
 ----------
 
-## [Parsing HTML](https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags)
+## Regex Often Fail Silently
 
-![Book Cover](images/parsing_html_with_regex.png)
+```javascript
+const reg = /[sem]+[js]/
+reg.test("cbz")     // true
+reg.test("axx")     // false
+reg.test("a")       // false
 
+const typo = /[abc}{2}[xyz]/
+typo.test("cbz")    // true
+typo.test("axx")    // true
+typo.test("a")      // true
+typo.test("[")      // true
+typo.test("2")      // true
+```
+
+==========
+
+## Where to use RegEx
+
+Note: Your code, your config files, your editor
+
+----------
+
+## Your word processor
+
+![Google Docs](images/google_docs.png)
+
+----------
+
+## Chrome via DeepSearch
+
+![Deep Search](images/deep_search.png)
+
+----------
+
+## The Command Line
+
+TODO something something grep
+TODO something something ag
+
+----------
+
+[![Book Cover](images/parsing_html_with_regex.png)](https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags)
+
+==========
+
+## Wrapping Up
 
 ----------
 
 ## Flavors of Regex
 
 - Backreferences are by either:
+  - `\1 \2` (Javascript, Perl, Python)
   - `$1 $2` (Ruby, Rust, PHP, Java)
-  - `\1 \2` (Javascript, Python)
   - `%1 %2` (Clojure)
 - Basics are ~universal across languages
 - Some advanced features vary (e.g., lookarounds, named references)
 
 ----------
 
-## Use a library with Javascript
+## Resources
 
-```javascript
-"bar baz".match(/ba\w/)    // [ "bar", index: 0, input: "bar baz" ]
-"bar baz".match(/ba(\w)/)  // [ "bar", "r", index: 0 input "bar baz" ]
-"bar baz".match(/ba\w/g)   // [ "bar", "baz" ]
-"bar baz".match(/ba(\w)/g) // [ "bar", "baz" ]
-"bar baz".match(/foo/)     // null
-"bar baz".match(/foo/g)    // null
+- TODO This deck
+- TODO Your Handout
+- [github.com/aloisdg/awesome-regex](https://github.com/aloisdg/awesome-regex)
+- [Regular-Expressions.info](https://www.regular-expressions.info/)
+- [Jeff Atwood's ode to regex]((https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/)
 
-// The "correct" way to capture globally.
-var matches, output = [];
-while (matches = /ba(\w)/.exec("bar baz")) {
-  output.push(matches[1]);
-}
-```
-
-==========
+----------
 
 ## Next Steps
 
-- [Lookarounds](https://www.regular-expressions.info/lookaround.html)
+- [Non-Capturing Groups](https://stackoverflow.com/a/3513858/1884044)
 - [Laziness](https://www.regular-expressions.info/repeat.html)
+- [Lookarounds](https://www.regular-expressions.info/lookaround.html)
+- [xRegExp](http://xregexp.com/) for Unicode, Backreferences, Named Groups, Syntactic Sugar, and more
 
+----------
+
+[![XKCD 1313](images/regex_golf.png)](https://xkcd.com/1313/)
+
+[Regex golf with Peter Norvig](https://www.oreilly.com/learning/regex-golf-with-peter-norvig)
 
 ----------
 
 ## Regex Crosswords
 
-![Crossword Screenshot](images/crossword.png)
+- [Original MIT Crossword](https://gregable.com/p/regexp-puzzle.html)
+- [RegexCrossword.com](https://regexcrossword.com/) Web App
+- [Regex Xword](https://play.google.com/store/apps/details?id=com.ilit.regexxword&hl=en_US) Android App
 
 ----------
 
-## [Regex Golf](https://www.oreilly.com/learning/regex-golf-with-peter-norvig)
+## Thanks
 
-![XKCD 1313](images/regex_golf.png)
+Henry Marshall
+Engineer at Stripe
+henry@stripe.com
+henry@isagoddamn.ninja
 
+==========
 
-----------
+## Crossword
 
-## Resources
-
-- [Regular Expression Cookbook (safari)](https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/)
-- [Introducing Regular Expressions (safari)](https://www.safaribooksonline.com/library/view/introducing-regular-expressions/9781449338879/)
-- [Regular-Expressions.info](https://www.regular-expressions.info/) reference guide.
-- [Rubular](http://rubular.com/) is a great way to play around with the Ruby
-  regex engine in your browser. It's how I build all my non-trivial regex!
-- [Jeff Atwood's ode to regex]((https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/) if you still need convincing.
-- Join #protip on Slack!
+- TODO Select characters for questions
