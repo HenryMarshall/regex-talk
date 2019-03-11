@@ -1715,3 +1715,8 @@ $controlsArrowAngleActive: 36deg;
 .zoomed .reveal .roll span:after {
 	visibility: hidden;
 }
+
+// Some of the themes override this, but I won't have it.
+img {
+	max-height: 45vh !important;
+}

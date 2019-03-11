@@ -1,1 +1,1 @@
-/home/henry/proj/slides/reveal.js/src/js
+src/js

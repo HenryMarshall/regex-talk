@@ -1399,3 +1399,6 @@ body {
 
 .zoomed .reveal .roll span:after {
   visibility: hidden; }
+
+img {
+  max-height: 45vh !important; }
