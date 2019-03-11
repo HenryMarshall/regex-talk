@@ -142,11 +142,30 @@ str.replace(reg, &quot;family&quot;)
 </code></pre>
 </section>
 <section><h2 id="character-class">Character Class</h2>
+<pre><code class="lang-javascript">const reg = /grand.a/
+
+const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
+str.replace(reg, &quot;family&quot;)
+
+reg.test(str)
+// true
+
+reg.test(&quot;My grandxa has a dog&quot;)
+// true
+</code></pre>
+</section>
+<section><h2 id="character-class">Character Class</h2>
 <pre><code class="lang-javascript">const reg = /grand[mp]a/g
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)
 // =&gt; &quot;My family has a cat. My family has a dog.&quot;
+
+reg.test(str)
+// true
+
+reg.test(&quot;My grandxa has a dog&quot;)
+// false
 </code></pre>
 <aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
 </aside></section>
@@ -190,7 +209,7 @@ containsNonVowel(&quot;foo&quot;)
 <section><h2 id="negation">Negation</h2>
 <pre><code class="lang-js">const reg = /[^aeiou]/
 
-const isNotVowel = str =&gt; reg.test(str)
+const containsNonVowel = str =&gt; reg.test(str)
 containsNonVowel(&quot;foo&quot;)
 // =&gt; true
 </code></pre>
@@ -352,19 +371,6 @@ contains_comment.match(extract_comment)[1].strip
 // =&gt; &quot;this is a comment\nthis too&quot;
 </code></pre>
 <p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
-</section>
-<section><h2 id="why-html-comments-suck">Why HTML Comments suck</h2>
-<pre><code class="lang-html">&lt;!-- I can comment out this div
-&lt;div&gt;foo&lt;/div&gt;
---&gt;
-
-&lt;!-- But not this one
-&lt;div&gt;
-  &lt;!-- Existing comment --&gt;
-  bar
-&lt;/div&gt;
---&gt;
-</code></pre>
 </section>
 <section><h2 id="other-times-is-too-much">Other times <code>.</code> is too much</h2>
 <pre><code class="lang-javascript">const foo = &#39;foo=&quot;foo&quot;&#39;

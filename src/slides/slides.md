@@ -103,6 +103,24 @@ str.replace(reg, "family")
 
 ----------
 
+
+## Character Class
+
+```javascript
+const reg = /grand.a/
+
+const str = "My grandma has a cat. My grandpa has a dog."
+str.replace(reg, "family")
+
+reg.test(str)
+// true
+
+reg.test("My grandxa has a dog")
+// true
+```
+
+----------
+
 ## Character Class
 
 ```javascript
@@ -111,6 +129,12 @@ const reg = /grand[mp]a/g
 const str = "My grandma has a cat. My grandpa has a dog."
 str.replace(reg, "family")
 // => "My family has a cat. My family has a dog."
+
+reg.test(str)
+// true
+
+reg.test("My grandxa has a dog")
+// false
 ```
 
 Note: The `g` flag makes the regex global.
@@ -146,7 +170,7 @@ containsNonVowel("foo")
 ```js
 const reg = /[^aeiou]/
 
-const isNotVowel = str => reg.test(str)
+const containsNonVowel = str => reg.test(str)
 containsNonVowel("foo")
 // => true
 ```
@@ -349,23 +373,6 @@ contains_comment.match(extract_comment)[1].strip
 ```
 
 This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
-
-----------
-
-## Why HTML Comments suck
-
-```html
-<!-- I can comment out this div
-<div>foo</div>
--->
-
-<!-- But not this one
-<div>
-  <!-- Existing comment -->
-  bar
-</div>
--->
-```
 
 ----------
 
