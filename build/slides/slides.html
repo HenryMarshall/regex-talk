@@ -51,7 +51,27 @@
 <p style="text-align: center;">Henry Marshall</p>
 <p style="text-align: center;">SEM.js</p>
 <p style="text-align: center;">2019-03-11</p></section>
-<section><section><h2 id="splitting-on-lines">Splitting on Lines</h2>
+<section><section><h2 id="why-learn-regex">Why Learn Regex</h2>
+<ul>
+<li>Powerful and Concise</li>
+<li>Truly cross-platform</li>
+<li>Will be around forever</li>
+</ul>
+</section>
+<section><h2 id="what-s-a-regex-">What&#39;s a Regex?</h2>
+<ul>
+<li>Way of describing patterns</li>
+<li>Tool for extracting data</li>
+</ul>
+</section>
+<section><h2 id="my-history-with-regex">My History with Regex</h2>
+</section></section>
+<section><section><h2 id="the-problem">The Problem</h2>
+<pre><code class="lang-javascript">const unix_str = &quot;foo\nbar&quot;
+const windows_str = &quot;foo\r\nbar&quot;
+</code></pre>
+</section>
+<section><h2 id="splitting-on-lines">Splitting on Lines</h2>
 <pre><code class="lang-javascript">const unix_str = &quot;foo\nbar&quot;
 unix_str.split(&quot;\n&quot;)
 // =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
@@ -101,23 +121,31 @@ windows_str.split(&quot;\n&quot;)
 <aside class='notes'><p>Omitting the first and second numbers implicitly means 0 and infinite respectively.</p>
 </aside></section>
 <section><h2 id="splitting-on-lines">Splitting on Lines</h2>
-<pre><code class="lang-javascript">const windows_str = &quot;foo\r\nbar&quot;
-windows_str.split(&quot;\n&quot;)
-// =&gt; [ &#39;foo\r&#39;, &#39;bar&#39; ]
+<pre><code class="lang-javascript">const reg = /\r?\n/
 
-windows_str.split(/\r?\n/)
+const unix_str = &quot;foo\nbar&quot;
+unix_str.split(reg)
+// =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
+
+const windows_str = &quot;foo\r\nbar&quot;
+windows_str.split(reg)
 // =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
 </code></pre>
+</section>
+<section><h2 id="crossword">Crossword</h2>
 </section></section>
 <section><section><h2 id="character-class">Character Class</h2>
-<pre><code class="lang-javascript">const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
-str.replace(/???/g, &quot;family&quot;)
+<pre><code class="lang-javascript">const reg = /???/
+
+const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
+str.replace(reg, &quot;family&quot;)
 </code></pre>
-<aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
-</aside></section>
+</section>
 <section><h2 id="character-class">Character Class</h2>
-<pre><code class="lang-javascript">const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
-str.replace(/grand[mp]a/g, &quot;family&quot;)
+<pre><code class="lang-javascript">const reg = /grand[mp]a/g
+
+const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
+str.replace(reg, &quot;family&quot;)
 // =&gt; &quot;My family has a cat. My family has a dog.&quot;
 </code></pre>
 <aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
@@ -152,13 +180,17 @@ str.replace(/grand[mp]a/g, &quot;family&quot;)
 <aside class='notes'><p>I can (and did) use <code>\d</code> inside another character class!</p>
 </aside></section>
 <section><h2 id="negation">Negation</h2>
-<pre><code class="lang-js">const containsNonVowel = str =&gt; /???/.test(str)
+<pre><code class="lang-js">const reg = /???/
+
+const containsNonVowel = str =&gt; reg.test(str)
 containsNonVowel(&quot;foo&quot;)
 // =&gt; true
 </code></pre>
 </section>
 <section><h2 id="negation">Negation</h2>
-<pre><code class="lang-js">const isNotVowel = str =&gt; /[^aeiou]/.test(str)
+<pre><code class="lang-js">const reg = /[^aeiou]/
+
+const isNotVowel = str =&gt; reg.test(str)
 containsNonVowel(&quot;foo&quot;)
 // =&gt; true
 </code></pre>
@@ -190,37 +222,65 @@ containsNonVowel(&quot;foo&quot;)
 </tr>
 </tbody>
 </table>
-</section></section>
-<section><h2 id="crossword">Crossword</h2>
-<p>TODO</p>
 </section>
+<section><h2 id="crossword">Crossword</h2>
+</section></section>
 <section><section><h2 id="groups">Groups</h2>
-<pre><code class="lang-js">const isTheme = str =&gt; /???/.test(str)
+<pre><code class="lang-js">const reg = /???/
+
+const isTheme = str =&gt; reg.test(str)
+
 isTheme(&quot;nanananananana Batman!&quot;)
+// =&gt; true
+</code></pre>
+</section>
+<section><pre><code class="lang-js">const reg = /[na]+/
+
+const isTheme = str =&gt; reg.test(str)
+
+isTheme(&quot;nanananananana Batman!&quot;)
+// =&gt; true
+
+isTheme(&quot;aaaaannnnnnnnn Batman!&quot;)
 // =&gt; true
 </code></pre>
 </section>
 <section><h2 id="groups">Groups</h2>
-<pre><code class="lang-js">const isTheme = str =&gt; /(na)+ Batman/.test(str)
+<pre><code class="lang-js">const reg = /[na]+/
+
+const isTheme = str =&gt; reg.test(str)
+
 isTheme(&quot;nanananananana Batman!&quot;)
 // =&gt; true
+
+isTheme(&quot;aaaaannnnnnnnn Batman!&quot;)
+// =&gt; false
 </code></pre>
 </section>
 <section><h2 id="alternation-in-groups">Alternation in Groups</h2>
-<pre><code class="lang-javascript">const str = &quot;My brother has a ferret. My sister has a cat.&quot;
-str.replace(/???/g, &quot;family&quot;)
+<pre><code class="lang-javascript">const reg = /???/g
+
+const str = &quot;My brother has a ferret. My sister has a cat.&quot;
+str.replace(reg, &quot;family&quot;)
 // =&gt; &quot;My family has a ferret. My family has a cat.&quot;
 </code></pre>
 </section>
 <section><h2 id="alternation-in-groups">Alternation in Groups</h2>
-<pre><code class="lang-javascript">const str = &quot;My brother has a ferret. My sister has a cat.&quot;
-str.replace(/(brother|sister)/g, &quot;family&quot;)
+<pre><code class="lang-javascript">const reg = /(brother|sister)/g
+
+const str = &quot;My brother has a ferret. My sister has a cat.&quot;
+str.replace(reg, &quot;family&quot;)
 // =&gt; &quot;My family has a ferret. My family has a cat.&quot;
+</code></pre>
+</section>
+<section><h2 id="more-than-1-way-to-match-a-query">More than 1 way to match a query</h2>
+<pre><code class="lang-javascript">const regCharacterClass = /grand[mp]a/g
+const regAlternationGroup = /grand(m|p)a/g
 </code></pre>
 </section>
 <section><h2 id="backreferences">Backreferences</h2>
 <pre><code class="lang-javascript">const str = &quot;My brother has a ferret.&quot;
-str.replace(/???/g, &quot;step-\1&quot;)
+str.replace(/(brother|sister)/g, &quot;???&quot;)
 // =&gt; &quot;My step-brother has a ferret.&quot;
 </code></pre>
 <aside class='notes'><p>Backreferences are 1-indexed</p>
@@ -233,8 +293,9 @@ str.replace(/(brother|sister)/g, &quot;step-\1&quot;)
 <aside class='notes'><p>Backreferences are 1-indexed</p>
 </aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
-<pre><code class="lang-js">const str = &quot;Stripe costs 2.9% + $0.30&quot;
-const reg = /???/
+<pre><code class="lang-js">const reg = /???/
+
+const str = &quot;Stripe costs 2.9% + $0.30&quot;
 const getPercentage = str =&gt; str.match(reg)[1]
 getPercentage(str)
 // =&gt; &quot;2.9&quot;
@@ -242,8 +303,9 @@ getPercentage(str)
 <aside class='notes'><p>To include <code>%</code>, move it inside the capture group</p>
 </aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
-<pre><code class="lang-js">const str = &quot;Stripe costs 2.9% + $0.30&quot;
-const reg = /(100|\d{1,2}(\.\d+)?)%/
+<pre><code class="lang-js">const reg = /(100|\d{1,2}(\.\d+)?)%/
+
+const str = &quot;Stripe costs 2.9% + $0.30&quot;
 const getPercentage = str =&gt; str.match(reg)[1]
 getPercentage(str)
 // =&gt; &quot;2.9&quot;
@@ -263,8 +325,7 @@ getPercentage(str)
 &quot;bar baz&quot;.match(/foo/g)    // =&gt; null
 </code></pre>
 <aside class='notes'><ul>
-<li>I hereafter omit <code>groups: undefined</code></li>
-<li>xRegExp library simplifies this and adds other features</li>
+<li>I hereafter omit <code>groups: undefined</code> which are for named groups</li>
 </ul>
 </aside></section>
 <section><h2 id="-exec-maintains-an-index"><code>.exec</code> maintains an index</h2>
@@ -280,8 +341,7 @@ allMatches(/ba(\w)/g, &quot;bar baz&quot;)
 // =&gt; [ [ &#39;bar&#39;, &#39;r&#39;, index: 0, input: &#39;bar baz&#39; ],
 //      [ &#39;baz&#39;, &#39;z&#39;, index: 4, input: &#39;bar baz&#39; ] ]
 </code></pre>
-<aside class='notes'><p>Do <em>not</em> define the regex in the while loop or you&#39;ll have an infinite loop. It also <em>must</em> be a global regex. We&#39;ll reuse this function later.</p>
-</aside></section></section>
+</section></section>
 <section><section><h2 id="sometimes-is-not-enough">Sometimes <code>.</code> is not enough</h2>
 <pre><code class="lang-javascript">extract_comment = /\/\*([\w\W]+)\*\//
 contains_comment = `this.bit.is.code()
@@ -292,6 +352,19 @@ contains_comment.match(extract_comment)[1].strip
 // =&gt; &quot;this is a comment\nthis too&quot;
 </code></pre>
 <p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
+</section>
+<section><h2 id="why-html-comments-suck">Why HTML Comments suck</h2>
+<pre><code class="lang-html">&lt;!-- I can comment out this div
+&lt;div&gt;foo&lt;/div&gt;
+--&gt;
+
+&lt;!-- But not this one
+&lt;div&gt;
+  &lt;!-- Existing comment --&gt;
+  bar
+&lt;/div&gt;
+--&gt;
+</code></pre>
 </section>
 <section><h2 id="other-times-is-too-much">Other times <code>.</code> is too much</h2>
 <pre><code class="lang-javascript">const foo = &#39;foo=&quot;foo&quot;&#39;
@@ -313,14 +386,13 @@ allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
 <li>Think about the interpretter</li>
 <li>You can make the regex engine lazy with <code>?</code></li>
 </ul>
-</aside></section></section>
+</aside></section>
 <section><h2 id="crossword">Crossword</h2>
-<p>TODO</p>
-</section>
+</section></section>
 <section><section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
-<p>TODO include tools for other languages</p>
 <ul>
-<li><a href="http://rubular.com">Rubular</a> [Ruby]</li>
+<li><a href="http://rubular.com">Rubular</a> (Ruby)</li>
+<li><a href="http://www.gethifi.com/tools/regex">hifi RegExp Tool</a> (JavaScript)</li>
 </ul>
 </section>
 <section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
@@ -383,56 +455,69 @@ containsOnlyEmail(injection) // false
 <pre><code class="lang-javascript">const isFirstCharacterVowel = str =&gt; /^[aeiou]/i.test(str)
 const containsNonVowel = str =&gt; /[^aeiou]/i
 </code></pre>
-</section>
-<section><h2 id="-s-various-meanings"><code>?</code>&#39;s various meanings</h2>
-<pre><code class="lang-javascript">const optionalPercent = /\d+%?/
-const nonCapturingGroup = /(100|\d{1,2}(?:\.\d+)?)%/
-const lazyInterpretter = /&quot;(.+?)&quot;/
-</code></pre>
-</section>
-<section><h2 id="metacharacters">Metacharacters</h2>
-<pre><code class="lang-plaintext">\ ^ $ . | ? * + ( ) [ ] { }
-</code></pre>
+<aside class='notes'><p><code>?</code> is also tricky</p>
+</aside></section>
+<section><h2 id="-">\ ^ $ . | ? * + ( ) [ ] { }</h2>
 <aside class='notes'><ul>
 <li>Over-escaping not a problem</li>
 <li>You <em>may</em> escape in character classes.</li>
 </ul>
 </aside></section>
 <section><h2 id="regex-often-fail-silently">Regex Often Fail Silently</h2>
-<pre><code class="lang-javascript">const reg = /[abc]{2}[xyz]/
+<pre><code class="lang-javascript">const reg =  /[abc]{2}[xyz]+/
 reg.test(&quot;cbz&quot;)     // true
 reg.test(&quot;axx&quot;)     // false
 reg.test(&quot;a&quot;)       // false
 
-const typo = /[abc}{2}[xyz]/
+const typo = /[abc}{2}[xyz]+/
 </code></pre>
 </section>
 <section><h2 id="regex-often-fail-silently">Regex Often Fail Silently</h2>
-<pre><code class="lang-javascript">const reg = /[sem]+[js]/
+<pre><code class="lang-javascript">const reg =  /[abc]+[xyz]+/
 reg.test(&quot;cbz&quot;)     // true
 reg.test(&quot;axx&quot;)     // false
 reg.test(&quot;a&quot;)       // false
 
-const typo = /[abc}{2}[xyz]/
+const typo = /[abc}{2}[xyz]+/
 typo.test(&quot;cbz&quot;)    // true
 typo.test(&quot;axx&quot;)    // true
 typo.test(&quot;a&quot;)      // true
 typo.test(&quot;[&quot;)      // true
 typo.test(&quot;2&quot;)      // true
 </code></pre>
-</section></section>
+<aside class='notes'><p>Test the negatives</p>
+</aside></section></section>
 <section><section><h2 id="where-to-use-regex">Where to use RegEx</h2>
 <aside class='notes'><p>Your code, your config files, your editor</p>
 </aside></section>
 <section><h2 id="your-word-processor">Your word processor</h2>
 <p><img src="images/google_docs.png" alt="Google Docs"></p>
 </section>
+<section><h2 id="pdf">PDF</h2>
+<ul>
+<li><a href="https://pdfgrep.org/">pdfgrep</a> Cross Platform CLI (FOSS)</li>
+<li><a href="http://dngrep.github.io/">dnGrep</a> GUI for Windows (FOSS)</li>
+<li><a href="https://www.mythicsoft.com/filelocatorpro/">FileLocator Pro</a> GUI for Windows ($60)</li>
+</ul>
+</section>
 <section><h2 id="chrome-via-deepsearch">Chrome via DeepSearch</h2>
 <p><img src="images/deep_search.png" alt="Deep Search"></p>
 </section>
-<section><h2 id="the-command-line">The Command Line</h2>
-<p>TODO something something grep
-TODO something something ag</p>
+<section><pre><code class="lang-plaintext">GREP(1)                                       User Commands
+
+NAME
+      grep, egrep, fgrep, rgrep - 
+        print lines matching a pattern
+
+SYNOPSIS
+      grep [OPTIONS] PATTERN [FILE...]
+      grep [OPTIONS] -e PATTERN ... [FILE...]
+      grep [OPTIONS] -f FILE ... [FILE...]
+
+DESCRIPTION
+      grep  searches  for PATTERN in each FILE.  A FILE of 
+      “-” stands for standard input.  If no FILE is given,
+</code></pre>
 </section>
 <section><p><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"><img src="images/parsing_html_with_regex.png" alt="Book Cover"></a></p>
 </section></section>
@@ -450,13 +535,20 @@ TODO something something ag</p>
 <li>Some advanced features vary (e.g., lookarounds, named references)</li>
 </ul>
 </section>
+<section><h2 id="regex-crosswords">Regex Crosswords</h2>
+<ul>
+<li><a href="https://gregable.com/p/regexp-puzzle.html">Original MIT Crossword</a></li>
+<li><a href="https://regexcrossword.com/">RegexCrossword.com</a> Web App</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.ilit.regexxword&amp;hl=en_US">Regex Xword</a> Android App</li>
+</ul>
+</section>
 <section><h2 id="resources">Resources</h2>
 <ul>
-<li>TODO This deck</li>
-<li>TODO Your Handout</li>
-<li><a href="https://github.com/aloisdg/awesome-regex">github.com/aloisdg/awesome-regex</a></li>
+<li>Slides: <a href="http://bit.ly/regex101">http://bit.ly/regex101</a></li>
+<li>Handout: <a href="http://bit.ly/regex101-cheatsheet">http://bit.ly/regex101-cheatsheet</a></li>
 <li><a href="https://www.regular-expressions.info/">Regular-Expressions.info</a></li>
-<li><a href="(https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Jeff Atwood&#39;s ode to regex</a></li>
+<li><a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Jeff Atwood&#39;s ode to regex</a></li>
+<li><a href="https://github.com/aloisdg/awesome-regex">github.com/aloisdg/awesome-regex</a></li>
 </ul>
 </section>
 <section><h2 id="next-steps">Next Steps</h2>
@@ -467,27 +559,13 @@ TODO something something ag</p>
 <li><a href="http://xregexp.com/">xRegExp</a> for Unicode, Backreferences, Named Groups, Syntactic Sugar, and more</li>
 </ul>
 </section>
-<section><p><a href="https://xkcd.com/1313/"><img src="images/regex_golf.png" alt="XKCD 1313"></a></p>
-<p><a href="https://www.oreilly.com/learning/regex-golf-with-peter-norvig">Regex golf with Peter Norvig</a></p>
+<section><p>Henry Marshall</p>
+<p>Engineer at Stripe</p>
+<p><a href="mailto:henry@stripe.com">henry@stripe.com</a></p>
+<p><a href="mailto:henry@isagoddamn.ninja">henry@isagoddamn.ninja</a></p>
 </section>
-<section><h2 id="regex-crosswords">Regex Crosswords</h2>
-<ul>
-<li><a href="https://gregable.com/p/regexp-puzzle.html">Original MIT Crossword</a></li>
-<li><a href="https://regexcrossword.com/">RegexCrossword.com</a> Web App</li>
-<li><a href="https://play.google.com/store/apps/details?id=com.ilit.regexxword&amp;hl=en_US">Regex Xword</a> Android App</li>
-</ul>
-</section>
-<section><h2 id="thanks">Thanks</h2>
-<p>Henry Marshall
-Engineer at Stripe
-<a href="mailto:henry@stripe.com">henry@stripe.com</a>
-<a href="mailto:henry@isagoddamn.ninja">henry@isagoddamn.ninja</a></p>
-</section></section>
 <section><h2 id="crossword">Crossword</h2>
-<ul>
-<li>TODO Select characters for questions</li>
-</ul>
-</section>
+</section></section>
 			</div>
 
 		</div>
