@@ -88,7 +88,19 @@ windows_str.split(reg)
 
 ----------
 
-## Crossword
+![Crossword 1](./images/regex_xword_1.svg)
+
+----------
+
+![Crossword 1 Solution](./images/regex_xword_1_solution.svg)
+
+----------
+
+![Crossword 2](./images/regex_xword_2.svg)
+
+----------
+
+![Crossword 2 Solution](./images/regex_xword_2_solution.svg)
 
 ==========
 
@@ -188,7 +200,11 @@ containsNonVowel("foo")
 
 ----------
 
-## Crossword
+![Crossword 3](./images/regex_xword_3.svg)
+
+----------
+
+![Crossword 3 Solution](./images/regex_xword_3_solution.svg)
 
 ==========
 
@@ -271,24 +287,49 @@ const regAlternationGroup = /grand(m|p)a/g
 ## Backreferences
 
 ```javascript
-const str = "My brother has a ferret."
-str.replace(/(brother|sister)/g, "???")
-// => "My step-brother has a ferret."
-```
+const reg = /???/
 
-Note: Backreferences are 1-indexed
+const strings = ["foo-foo", "foo-bar", "foo-bar"]
+strings.filter(str => reg.test(str))
+// => [ "foo-foo", "bar-bar" ]
+```
 
 ----------
 
 ## Backreferences
 
 ```javascript
-const str = "My brother has a ferret."
-str.replace(/(brother|sister)/g, "step-\1")
-// => "My step-brother has a ferret."
+const reg = /(\w+)-\1/
+
+const strings = ["foo-foo", "foo-bar", "foo-bar"]
+strings.filter(str => reg.test(str))
+// => [ "foo-foo", "bar-bar" ]
 ```
 
 Note: Backreferences are 1-indexed
+
+----------
+
+## Replace Interpolation
+
+```javascript
+const str = "My brother has a ferret."
+str.replace(/(brother|sister)/g, "???")
+// => "My step-brother has a ferret."
+```
+
+
+----------
+
+## Replace Interpolation
+
+```javascript
+const str = "My brother has a ferret."
+str.replace(/(brother|sister)/g, "step-$1")
+// => "My step-brother has a ferret."
+```
+
+Note: Use `$1` instead of `\1`
 
 ----------
 
@@ -319,6 +360,25 @@ getPercentage(str)
 ```
 
 Note: To include `%`, move it inside the capture group
+
+
+----------
+
+## Named Captures
+
+```js
+const reg = /(?<day>\d{1,2})\/(?<month>\d{1,2})\/(?<year>\d{4}|\d{2})/
+
+const str = "Apollo 11 landed on the moon on 20/7/1969"
+const extractDate = str => str.match(reg)
+extractDate(str).groups
+// => {day: "20", month: "7", year: "1969"}
+```
+
+Note: 
+- New to ES2018
+- In pattern with `\k<year>`
+- Backreference with `
 
 ==========
 
@@ -360,16 +420,19 @@ allMatches(/ba(\w)/g, "bar baz")
 
 ==========
 
-## Sometimes `.` is not enough
+## Dot All the Things
 
 ```javascript
-extract_comment = /\/\*([\w\W]+)\*\//
-contains_comment = `this.bit.is.code()
+const extract_comment = /\/\*(.)\*\//s
+const contains_comment = `this.bit.is.code()
 /* this is a comment
 this too */
 more.code()`
 contains_comment.match(extract_comment)[1].strip
 // => "this is a comment\nthis too"
+
+// Old Style
+// const extract_comment = /\/\*([\w\W]+)\*\//
 ```
 
 This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
@@ -401,7 +464,11 @@ Note:
 
 ----------
 
-## Crossword
+![Crossword 4](./images/regex_xword_4.svg)
+
+----------
+
+![Crossword 4 Solution](./images/regex_xword_4_solution.svg)
 
 ==========
 
@@ -577,22 +644,23 @@ DESCRIPTION
 
 ----------
 
+## Next Steps
+
+- [Unicode](http://2ality.com/2017/07/regexp-unicode-property-escapes.html)
+- [Non-Capturing Groups](https://stackoverflow.com/a/3513858/1884044)
+- [Laziness](https://www.regular-expressions.info/repeat.html)
+- [Lookarounds](https://www.regular-expressions.info/lookaround.html)
+
+----------
+
 ## Resources
 
 - Slides: [http://bit.ly/regex101](http://bit.ly/regex101)
 - Handout: [http://bit.ly/regex101-cheatsheet](http://bit.ly/regex101-cheatsheet)
 - [Regular-Expressions.info](https://www.regular-expressions.info/)
+- [ES2018 Regex changes in SmashingMagazine](https://www.smashingmagazine.com/2019/02/regexp-features-regular-expressions/)
 - [Jeff Atwood's ode to regex](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/)
 - [github.com/aloisdg/awesome-regex](https://github.com/aloisdg/awesome-regex)
-
-----------
-
-## Next Steps
-
-- [Non-Capturing Groups](https://stackoverflow.com/a/3513858/1884044)
-- [Laziness](https://www.regular-expressions.info/repeat.html)
-- [Lookarounds](https://www.regular-expressions.info/lookaround.html)
-- [xRegExp](http://xregexp.com/) for Unicode, Backreferences, Named Groups, Syntactic Sugar, and more
 
 ----------
 
@@ -606,4 +674,8 @@ henry@isagoddamn.ninja
 
 ----------
 
-## Crossword
+![Crossword 5](./images/regex_xword_5.svg)
+
+----------
+
+![Crossword 5 Solution](./images/regex_xword_5_solution.svg)

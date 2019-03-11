@@ -132,7 +132,13 @@ windows_str.split(reg)
 // =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
 </code></pre>
 </section>
-<section><h2 id="crossword">Crossword</h2>
+<section><p><img src="./images/regex_xword_1.svg" alt="Crossword 1"></p>
+</section>
+<section><p><img src="./images/regex_xword_1_solution.svg" alt="Crossword 1 Solution"></p>
+</section>
+<section><p><img src="./images/regex_xword_2.svg" alt="Crossword 2"></p>
+</section>
+<section><p><img src="./images/regex_xword_2_solution.svg" alt="Crossword 2 Solution"></p>
 </section></section>
 <section><section><h2 id="character-class">Character Class</h2>
 <pre><code class="lang-javascript">const reg = /???/
@@ -242,7 +248,9 @@ containsNonVowel(&quot;foo&quot;)
 </tbody>
 </table>
 </section>
-<section><h2 id="crossword">Crossword</h2>
+<section><p><img src="./images/regex_xword_3.svg" alt="Crossword 3"></p>
+</section>
+<section><p><img src="./images/regex_xword_3_solution.svg" alt="Crossword 3 Solution"></p>
 </section></section>
 <section><section><h2 id="groups">Groups</h2>
 <pre><code class="lang-js">const reg = /???/
@@ -298,18 +306,34 @@ const regAlternationGroup = /grand(m|p)a/g
 </code></pre>
 </section>
 <section><h2 id="backreferences">Backreferences</h2>
+<pre><code class="lang-javascript">const reg = /???/
+
+const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;foo-bar&quot;]
+strings.filter(str =&gt; reg.test(str))
+// =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
+</code></pre>
+</section>
+<section><h2 id="backreferences">Backreferences</h2>
+<pre><code class="lang-javascript">const reg = /(\w+)-\1/
+
+const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;foo-bar&quot;]
+strings.filter(str =&gt; reg.test(str))
+// =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
+</code></pre>
+<aside class='notes'><p>Backreferences are 1-indexed</p>
+</aside></section>
+<section><h2 id="replace-interpolation">Replace Interpolation</h2>
 <pre><code class="lang-javascript">const str = &quot;My brother has a ferret.&quot;
 str.replace(/(brother|sister)/g, &quot;???&quot;)
 // =&gt; &quot;My step-brother has a ferret.&quot;
 </code></pre>
-<aside class='notes'><p>Backreferences are 1-indexed</p>
-</aside></section>
-<section><h2 id="backreferences">Backreferences</h2>
+</section>
+<section><h2 id="replace-interpolation">Replace Interpolation</h2>
 <pre><code class="lang-javascript">const str = &quot;My brother has a ferret.&quot;
-str.replace(/(brother|sister)/g, &quot;step-\1&quot;)
+str.replace(/(brother|sister)/g, &quot;step-$1&quot;)
 // =&gt; &quot;My step-brother has a ferret.&quot;
 </code></pre>
-<aside class='notes'><p>Backreferences are 1-indexed</p>
+<aside class='notes'><p>Use <code>$1</code> instead of <code>\1</code></p>
 </aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
 <pre><code class="lang-js">const reg = /???/
@@ -330,6 +354,20 @@ getPercentage(str)
 // =&gt; &quot;2.9&quot;
 </code></pre>
 <aside class='notes'><p>To include <code>%</code>, move it inside the capture group</p>
+</aside></section>
+<section><h2 id="named-captures">Named Captures</h2>
+<pre><code class="lang-js">const reg = /(?&lt;day&gt;\d{1,2})\/(?&lt;month&gt;\d{1,2})\/(?&lt;year&gt;\d{4}|\d{2})/
+
+const str = &quot;Apollo 11 landed on the moon on 20/7/1969&quot;
+const extractDate = str =&gt; str.match(reg)
+extractDate(str).groups
+// =&gt; {day: &quot;20&quot;, month: &quot;7&quot;, year: &quot;1969&quot;}
+</code></pre>
+<aside class='notes'><ul>
+<li>New to ES2018</li>
+<li>In pattern with <code>\k&lt;year&gt;</code></li>
+<li>Backreference with `</li>
+</ul>
 </aside></section></section>
 <section><section><h2 id="javascript-is-weird">JavaScript is Weird</h2>
 <pre><code class="lang-javascript">&quot;bar baz&quot;.match(/ba\w/)    
@@ -361,14 +399,17 @@ allMatches(/ba(\w)/g, &quot;bar baz&quot;)
 //      [ &#39;baz&#39;, &#39;z&#39;, index: 4, input: &#39;bar baz&#39; ] ]
 </code></pre>
 </section></section>
-<section><section><h2 id="sometimes-is-not-enough">Sometimes <code>.</code> is not enough</h2>
-<pre><code class="lang-javascript">extract_comment = /\/\*([\w\W]+)\*\//
-contains_comment = `this.bit.is.code()
+<section><section><h2 id="dot-all-the-things">Dot All the Things</h2>
+<pre><code class="lang-javascript">const extract_comment = /\/\*(.)\*\//s
+const contains_comment = `this.bit.is.code()
 /* this is a comment
 this too */
 more.code()`
 contains_comment.match(extract_comment)[1].strip
 // =&gt; &quot;this is a comment\nthis too&quot;
+
+// Old Style
+// const extract_comment = /\/\*([\w\W]+)\*\//
 </code></pre>
 <p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
 </section>
@@ -393,7 +434,9 @@ allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
 <li>You can make the regex engine lazy with <code>?</code></li>
 </ul>
 </aside></section>
-<section><h2 id="crossword">Crossword</h2>
+<section><p><img src="./images/regex_xword_4.svg" alt="Crossword 4"></p>
+</section>
+<section><p><img src="./images/regex_xword_4_solution.svg" alt="Crossword 4 Solution"></p>
 </section></section>
 <section><section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
 <ul>
@@ -548,21 +591,22 @@ DESCRIPTION
 <li><a href="https://play.google.com/store/apps/details?id=com.ilit.regexxword&amp;hl=en_US">Regex Xword</a> Android App</li>
 </ul>
 </section>
+<section><h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="http://2ality.com/2017/07/regexp-unicode-property-escapes.html">Unicode</a></li>
+<li><a href="https://stackoverflow.com/a/3513858/1884044">Non-Capturing Groups</a></li>
+<li><a href="https://www.regular-expressions.info/repeat.html">Laziness</a></li>
+<li><a href="https://www.regular-expressions.info/lookaround.html">Lookarounds</a></li>
+</ul>
+</section>
 <section><h2 id="resources">Resources</h2>
 <ul>
 <li>Slides: <a href="http://bit.ly/regex101">http://bit.ly/regex101</a></li>
 <li>Handout: <a href="http://bit.ly/regex101-cheatsheet">http://bit.ly/regex101-cheatsheet</a></li>
 <li><a href="https://www.regular-expressions.info/">Regular-Expressions.info</a></li>
+<li><a href="https://www.smashingmagazine.com/2019/02/regexp-features-regular-expressions/">ES2018 Regex changes in SmashingMagazine</a></li>
 <li><a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Jeff Atwood&#39;s ode to regex</a></li>
 <li><a href="https://github.com/aloisdg/awesome-regex">github.com/aloisdg/awesome-regex</a></li>
-</ul>
-</section>
-<section><h2 id="next-steps">Next Steps</h2>
-<ul>
-<li><a href="https://stackoverflow.com/a/3513858/1884044">Non-Capturing Groups</a></li>
-<li><a href="https://www.regular-expressions.info/repeat.html">Laziness</a></li>
-<li><a href="https://www.regular-expressions.info/lookaround.html">Lookarounds</a></li>
-<li><a href="http://xregexp.com/">xRegExp</a> for Unicode, Backreferences, Named Groups, Syntactic Sugar, and more</li>
 </ul>
 </section>
 <section><p>Henry Marshall</p>
@@ -570,7 +614,9 @@ DESCRIPTION
 <p><a href="mailto:henry@stripe.com">henry@stripe.com</a></p>
 <p><a href="mailto:henry@isagoddamn.ninja">henry@isagoddamn.ninja</a></p>
 </section>
-<section><h2 id="crossword">Crossword</h2>
+<section><p><img src="./images/regex_xword_5.svg" alt="Crossword 5"></p>
+</section>
+<section><p><img src="./images/regex_xword_5_solution.svg" alt="Crossword 5 Solution"></p>
 </section></section>
 			</div>
 
