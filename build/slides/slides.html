@@ -261,7 +261,8 @@ isTheme(&quot;nanananananana Batman!&quot;)
 // =&gt; true
 </code></pre>
 </section>
-<section><pre><code class="lang-js">const reg = /[na]+/
+<section><h2 id="groups">Groups</h2>
+<pre><code class="lang-js">const reg = /[na]+/
 
 const isTheme = str =&gt; reg.test(str)
 
@@ -273,7 +274,7 @@ isTheme(&quot;aaaaannnnnnnnn Batman!&quot;)
 </code></pre>
 </section>
 <section><h2 id="groups">Groups</h2>
-<pre><code class="lang-js">const reg = /[na]+/
+<pre><code class="lang-js">const reg = /(na)+/
 
 const isTheme = str =&gt; reg.test(str)
 
@@ -308,7 +309,7 @@ const regAlternationGroup = /grand(m|p)a/g
 <section><h2 id="backreferences">Backreferences</h2>
 <pre><code class="lang-javascript">const reg = /???/
 
-const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;foo-bar&quot;]
+const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;bar-bar&quot;]
 strings.filter(str =&gt; reg.test(str))
 // =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
 </code></pre>
@@ -316,7 +317,7 @@ strings.filter(str =&gt; reg.test(str))
 <section><h2 id="backreferences">Backreferences</h2>
 <pre><code class="lang-javascript">const reg = /(\w+)-\1/
 
-const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;foo-bar&quot;]
+const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;bar-bar&quot;]
 strings.filter(str =&gt; reg.test(str))
 // =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
 </code></pre>
@@ -356,7 +357,7 @@ getPercentage(str)
 <aside class='notes'><p>To include <code>%</code>, move it inside the capture group</p>
 </aside></section>
 <section><h2 id="named-captures">Named Captures</h2>
-<pre><code class="lang-js">const reg = /(?&lt;day&gt;\d{1,2})\/(?&lt;month&gt;\d{1,2})\/(?&lt;year&gt;\d{4}|\d{2})/
+<pre><code class="lang-js">const reg = /(?&lt;day&gt;\d{1,2})\/(?&lt;month&gt;\d{1,2})\/(?&lt;year&gt;\d{4})/
 
 const str = &quot;Apollo 11 landed on the moon on 20/7/1969&quot;
 const extractDate = str =&gt; str.match(reg)
@@ -400,7 +401,7 @@ allMatches(/ba(\w)/g, &quot;bar baz&quot;)
 </code></pre>
 </section></section>
 <section><section><h2 id="dot-all-the-things">Dot All the Things</h2>
-<pre><code class="lang-javascript">const extract_comment = /\/\*(.)\*\//s
+<pre><code class="lang-javascript">const extract_comment = /\/\*(.+)\*\//s
 const contains_comment = `this.bit.is.code()
 /* this is a comment
 this too */
@@ -408,8 +409,7 @@ more.code()`
 contains_comment.match(extract_comment)[1].strip
 // =&gt; &quot;this is a comment\nthis too&quot;
 
-// Old Style
-// const extract_comment = /\/\*([\w\W]+)\*\//
+const es3_extract_comment = /\/\*([\w\W]+)\*\//
 </code></pre>
 <p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
 </section>
@@ -498,7 +498,10 @@ const containsOnlyEmail = str =&gt;
   /^[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(str)
 containsOnlyEmail(injection) // false
 </code></pre>
-<aside class='notes'><p>Ruby treats as multi-line by default -- use <code>\A</code> &amp; <code>\z</code>. If you <em>want</em> that behavior, use multiline flag <code>m</code>.</p>
+<aside class='notes'><ul>
+<li>Ruby treats as multi-line by default -- use <code>\A</code> &amp; <code>\z</code>.</li>
+<li>If you <em>want</em> that behavior, use multiline flag <code>m</code>.</li>
+</ul>
 </aside></section></section>
 <section><section><h2 id="-s-various-meanings"><code>^</code>&#39;s various meanings</h2>
 <pre><code class="lang-javascript">const isFirstCharacterVowel = str =&gt; /^[aeiou]/i.test(str)

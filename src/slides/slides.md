@@ -221,6 +221,8 @@ isTheme("nanananananana Batman!")
 
 ----------
 
+## Groups
+
 ```js
 const reg = /[na]+/
 
@@ -238,7 +240,7 @@ isTheme("aaaaannnnnnnnn Batman!")
 ## Groups
 
 ```js
-const reg = /[na]+/
+const reg = /(na)+/
 
 const isTheme = str => reg.test(str)
 
@@ -289,7 +291,7 @@ const regAlternationGroup = /grand(m|p)a/g
 ```javascript
 const reg = /???/
 
-const strings = ["foo-foo", "foo-bar", "foo-bar"]
+const strings = ["foo-foo", "foo-bar", "bar-bar"]
 strings.filter(str => reg.test(str))
 // => [ "foo-foo", "bar-bar" ]
 ```
@@ -301,7 +303,7 @@ strings.filter(str => reg.test(str))
 ```javascript
 const reg = /(\w+)-\1/
 
-const strings = ["foo-foo", "foo-bar", "foo-bar"]
+const strings = ["foo-foo", "foo-bar", "bar-bar"]
 strings.filter(str => reg.test(str))
 // => [ "foo-foo", "bar-bar" ]
 ```
@@ -367,7 +369,7 @@ Note: To include `%`, move it inside the capture group
 ## Named Captures
 
 ```js
-const reg = /(?<day>\d{1,2})\/(?<month>\d{1,2})\/(?<year>\d{4}|\d{2})/
+const reg = /(?<day>\d{1,2})\/(?<month>\d{1,2})\/(?<year>\d{4})/
 
 const str = "Apollo 11 landed on the moon on 20/7/1969"
 const extractDate = str => str.match(reg)
@@ -423,7 +425,7 @@ allMatches(/ba(\w)/g, "bar baz")
 ## Dot All the Things
 
 ```javascript
-const extract_comment = /\/\*(.)\*\//s
+const extract_comment = /\/\*(.+)\*\//s
 const contains_comment = `this.bit.is.code()
 /* this is a comment
 this too */
@@ -431,8 +433,7 @@ more.code()`
 contains_comment.match(extract_comment)[1].strip
 // => "this is a comment\nthis too"
 
-// Old Style
-// const extract_comment = /\/\*([\w\W]+)\*\//
+const es3_extract_comment = /\/\*([\w\W]+)\*\//
 ```
 
 This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
@@ -515,7 +516,9 @@ const containsOnlyEmail = str =>
 containsOnlyEmail(injection) // false
 ```
 
-Note: Ruby treats as multi-line by default -- use `\A` & `\z`. If you *want* that behavior, use multiline flag `m`.
+Note: 
+- Ruby treats as multi-line by default -- use `\A` & `\z`.
+- If you *want* that behavior, use multiline flag `m`.
 
 ==========
 
