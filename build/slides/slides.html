@@ -136,18 +136,20 @@ windows_str.split(reg)
 </section>
 <section><p><img src="./images/regex_xword_1_solution.svg" alt="Crossword 1 Solution"></p>
 </section>
+<section><h2 id="the-dot-character">The dot character</h2>
+</section>
 <section><p><img src="./images/regex_xword_2.svg" alt="Crossword 2"></p>
 </section>
 <section><p><img src="./images/regex_xword_2_solution.svg" alt="Crossword 2 Solution"></p>
 </section></section>
-<section><section><h2 id="character-class">Character Class</h2>
+<section><section><h2 id="matching-either-or">Matching Either Or</h2>
 <pre><code class="lang-javascript">const reg = /???/
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)
 </code></pre>
 </section>
-<section><h2 id="character-class">Character Class</h2>
+<section><h2 id="solution-with-">&quot;Solution&quot; with .</h2>
 <pre><code class="lang-javascript">const reg = /grand.a/
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
@@ -230,10 +232,6 @@ containsNonVowel(&quot;foo&quot;)
 </thead>
 <tbody>
 <tr>
-<td><code>.</code></td>
-<td><code>[^\r\n]</code></td>
-</tr>
-<tr>
 <td><code>\D</code></td>
 <td><code>[^\d]</code></td>
 </tr>
@@ -244,6 +242,38 @@ containsNonVowel(&quot;foo&quot;)
 <tr>
 <td><code>\W</code></td>
 <td><code>[^\w]</code></td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td><code>[^\r\n]</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section><h2 id="literal-characters">Literal Characters</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code></td>
+<td><code>a</code></td>
+</tr>
+<tr>
+<td><code>\?</code></td>
+<td><code>?</code></td>
+</tr>
+<tr>
+<td><code>\.</code></td>
+<td><code>.</code></td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td><code>\</code></td>
 </tr>
 </tbody>
 </table>
@@ -261,7 +291,7 @@ isTheme(&quot;nanananananana Batman!&quot;)
 // =&gt; true
 </code></pre>
 </section>
-<section><h2 id="groups">Groups</h2>
+<section><h2 id="character-classes-solution">Character Classes &quot;Solution&quot;</h2>
 <pre><code class="lang-js">const reg = /[na]+/
 
 const isTheme = str =&gt; reg.test(str)
@@ -304,6 +334,7 @@ str.replace(reg, &quot;family&quot;)
 <section><h2 id="more-than-1-way-to-match-a-query">More than 1 way to match a query</h2>
 <pre><code class="lang-javascript">const regCharacterClass = /grand[mp]a/g
 const regAlternationGroup = /grand(m|p)a/g
+const regAlternationWord - /(grandma|grandpa)/g
 </code></pre>
 </section>
 <section><h2 id="backreferences">Backreferences</h2>

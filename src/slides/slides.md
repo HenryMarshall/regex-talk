@@ -96,6 +96,10 @@ windows_str.split(reg)
 
 ----------
 
+## The dot character
+
+----------
+
 ![Crossword 2](./images/regex_xword_2.svg)
 
 ----------
@@ -104,7 +108,7 @@ windows_str.split(reg)
 
 ==========
 
-## Character Class
+## Matching Either Or
 
 ```javascript
 const reg = /???/
@@ -116,7 +120,7 @@ str.replace(reg, "family")
 ----------
 
 
-## Character Class
+## "Solution" with .
 
 ```javascript
 const reg = /grand.a/
@@ -152,6 +156,7 @@ reg.test("My grandxa has a dog")
 Note: The `g` flag makes the regex global.
 
 ----------
+
 ## Shorthand Character Class
 
 | Shorthand | Equivalent      |
@@ -193,10 +198,21 @@ containsNonVowel("foo")
 
 | Shorthand | Equivalent |
 | --------- | ---------- |
-| `.`       | `[^\r\n]`  |
 | `\D`      | `[^\d]`    |
 | `\S`      | `[^\s]`    |
 | `\W`      | `[^\w]`    |
+| `.`       | `[^\r\n]`  |
+
+----------
+
+## Literal Characters
+
+| Command | Matches |
+| ------- | ------- |
+| `a`     | `a`     |
+| `\?`    | `?`     |
+| `\.`    | `.`     |
+| `\\`    | `\`     |
 
 ----------
 
@@ -221,7 +237,7 @@ isTheme("nanananananana Batman!")
 
 ----------
 
-## Groups
+## Character Classes "Solution"
 
 ```js
 const reg = /[na]+/
@@ -282,6 +298,7 @@ str.replace(reg, "family")
 ```javascript
 const regCharacterClass = /grand[mp]a/g
 const regAlternationGroup = /grand(m|p)a/g
+const regAlternationWord - /(grandma|grandpa)/g
 ```
 
 ----------
