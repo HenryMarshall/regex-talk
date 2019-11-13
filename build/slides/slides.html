@@ -48,17 +48,16 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
         <section><h1 id="regex-101">Regex 101</h1>
-<p style="text-align: center;">Henry Marshall</p>
-<p style="text-align: center;">SEM.js</p>
-<p style="text-align: center;">2019-03-11</p></section>
+<p style="text-align: center;">Henry Marshall</p></section>
 <section><section><h2 id="why-learn-regex">Why Learn Regex</h2>
 <ul>
 <li>Powerful and Concise</li>
 <li>Truly cross-platform</li>
 <li>Will be around forever</li>
+<li>Easy to learn</li>
 </ul>
 </section>
-<section><h2 id="what-s-a-regex-">What&#39;s a Regex?</h2>
+<section><h2 id="whats-a-regex">What&#39;s a Regex?</h2>
 <ul>
 <li>Way of describing patterns</li>
 <li>Tool for extracting data</li>
@@ -67,19 +66,17 @@
 <section><h2 id="my-history-with-regex">My History with Regex</h2>
 </section></section>
 <section><section><h2 id="the-problem">The Problem</h2>
-<pre><code class="lang-javascript">const unix_str = &quot;foo\nbar&quot;
-const windows_str = &quot;foo\r\nbar&quot;
-</code></pre>
+<pre><code class="language-javascript">const unix_str = &quot;foo\nbar&quot;
+const windows_str = &quot;foo\r\nbar&quot;</code></pre>
 </section>
 <section><h2 id="splitting-on-lines">Splitting on Lines</h2>
-<pre><code class="lang-javascript">const unix_str = &quot;foo\nbar&quot;
+<pre><code class="language-javascript">const unix_str = &quot;foo\nbar&quot;
 unix_str.split(&quot;\n&quot;)
-// =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
+// [ &#39;foo&#39;, &#39;bar&#39; ]
 
 const windows_str = &quot;foo\r\nbar&quot;
 windows_str.split(&quot;\n&quot;)
-// =&gt; [ &#39;foo\r&#39;, &#39;bar&#39; ]
-</code></pre>
+// [ &#39;foo\r&#39;, &#39;bar&#39; ]</code></pre>
 </section>
 <section><h2 id="repeating-characters">Repeating Characters</h2>
 <table>
@@ -90,10 +87,9 @@ windows_str.split(&quot;\n&quot;)
 <th>Matches</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>a?</code></td>
-<td>One or Zero &#39;a&#39;</td>
+<td>Zero or One &#39;a&#39;</td>
 <td>&#39;&#39; &#39;a&#39;</td>
 </tr>
 <tr>
@@ -116,65 +112,66 @@ windows_str.split(&quot;\n&quot;)
 <td>Two to four &#39;a&#39;</td>
 <td>&#39;aa&#39; &#39;aaaa&#39; &#39;aaaa&#39;</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <aside class='notes'><p>Omitting the first and second numbers implicitly means 0 and infinite respectively.</p>
 </aside></section>
 <section><h2 id="splitting-on-lines">Splitting on Lines</h2>
-<pre><code class="lang-javascript">const reg = /\r?\n/
+<pre><code class="language-javascript">const reg = /\r?\n/
 
 const unix_str = &quot;foo\nbar&quot;
 unix_str.split(reg)
-// =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
+// [ &#39;foo&#39;, &#39;bar&#39; ]
 
 const windows_str = &quot;foo\r\nbar&quot;
 windows_str.split(reg)
-// =&gt; [ &#39;foo&#39;, &#39;bar&#39; ]
-</code></pre>
+// [ &#39;foo&#39;, &#39;bar&#39; ]</code></pre>
 </section>
 <section><p><img src="./images/regex_xword_1.svg" alt="Crossword 1"></p>
 </section>
 <section><p><img src="./images/regex_xword_1_solution.svg" alt="Crossword 1 Solution"></p>
-</section>
-<section><h2 id="the-dot-character">The dot character</h2>
+</section></section>
+<section><section><h2 id="the-dot-character">The dot character</h2>
+<pre><code class="language-javascript">const reg = /ba./
+
+reg.test(&quot;foo&quot;) // false
+reg.test(&quot;bar&quot;) // true
+reg.test(&quot;baz&quot;) // true</code></pre>
 </section>
 <section><p><img src="./images/regex_xword_2.svg" alt="Crossword 2"></p>
 </section>
 <section><p><img src="./images/regex_xword_2_solution.svg" alt="Crossword 2 Solution"></p>
 </section></section>
 <section><section><h2 id="matching-either-or">Matching Either Or</h2>
-<pre><code class="lang-javascript">const reg = /???/
+<pre><code class="language-javascript">const reg = /???/
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
-str.replace(reg, &quot;family&quot;)
-</code></pre>
+str.replace(reg, &quot;family&quot;)</code></pre>
 </section>
 <section><h2 id="solution-with-">&quot;Solution&quot; with .</h2>
-<pre><code class="lang-javascript">const reg = /grand.a/
+<pre><code class="language-javascript">const reg = /grand.a/
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)
+// &quot;My family has a cat. My family has a dog.&quot;
 
 reg.test(str)
 // true
 
-reg.test(&quot;My grandxa has a dog&quot;)
-// true
-</code></pre>
+reg.test(&quot;My grandxa has a hamster&quot;)
+// true</code></pre>
 </section>
 <section><h2 id="character-class">Character Class</h2>
-<pre><code class="lang-javascript">const reg = /grand[mp]a/g
+<pre><code class="language-javascript">const reg = /grand[mp]a/g
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)
-// =&gt; &quot;My family has a cat. My family has a dog.&quot;
+// &quot;My family has a cat. My family has a dog.&quot;
 
 reg.test(str)
 // true
 
-reg.test(&quot;My grandxa has a dog&quot;)
-// false
-</code></pre>
+reg.test(&quot;My grandxa has a hamster&quot;)
+// false</code></pre>
 <aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
 </aside></section>
 <section><h2 id="shorthand-character-class">Shorthand Character Class</h2>
@@ -185,8 +182,7 @@ reg.test(&quot;My grandxa has a dog&quot;)
 <th>Equivalent</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>[0-9]</code></td>
 <td><code>[0123456789]</code></td>
 </tr>
@@ -202,25 +198,28 @@ reg.test(&quot;My grandxa has a dog&quot;)
 <td><code>\s</code></td>
 <td><code>[ \t\n\r]</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <aside class='notes'><p>I can (and did) use <code>\d</code> inside another character class!</p>
 </aside></section>
 <section><h2 id="negation">Negation</h2>
-<pre><code class="lang-js">const reg = /???/
+<pre><code class="language-javascript">const reg = /???/
 
 const containsNonVowel = str =&gt; reg.test(str)
 containsNonVowel(&quot;foo&quot;)
-// =&gt; true
-</code></pre>
+// true
+
+containsNonVowel(&quot;AAAAAAAA&quot;)
+// false</code></pre>
 </section>
 <section><h2 id="negation">Negation</h2>
-<pre><code class="lang-js">const reg = /[^aeiou]/
+<pre><code class="language-javascript">const reg = /[^aeiou]/i
 
 const containsNonVowel = str =&gt; reg.test(str)
 containsNonVowel(&quot;foo&quot;)
-// =&gt; true
-</code></pre>
+// true
+
+containsNonVowel(&quot;AAAAAAAA&quot;)
+// false</code></pre>
 </section>
 <section><h2 id="shorthand-negation">Shorthand Negation</h2>
 <table>
@@ -230,8 +229,7 @@ containsNonVowel(&quot;foo&quot;)
 <th>Equivalent</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>\D</code></td>
 <td><code>[^\d]</code></td>
 </tr>
@@ -247,8 +245,7 @@ containsNonVowel(&quot;foo&quot;)
 <td><code>.</code></td>
 <td><code>[^\r\n]</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 </section>
 <section><h2 id="literal-characters">Literal Characters</h2>
 <table>
@@ -258,8 +255,7 @@ containsNonVowel(&quot;foo&quot;)
 <th>Matches</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>a</code></td>
 <td><code>a</code></td>
 </tr>
@@ -275,194 +271,141 @@ containsNonVowel(&quot;foo&quot;)
 <td><code>\\</code></td>
 <td><code>\</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 </section>
 <section><p><img src="./images/regex_xword_3.svg" alt="Crossword 3"></p>
 </section>
 <section><p><img src="./images/regex_xword_3_solution.svg" alt="Crossword 3 Solution"></p>
 </section></section>
 <section><section><h2 id="groups">Groups</h2>
-<pre><code class="lang-js">const reg = /???/
+<pre><code class="language-javascript">const reg = /???/
 
 const isTheme = str =&gt; reg.test(str)
 
 isTheme(&quot;nanananananana Batman!&quot;)
-// =&gt; true
-</code></pre>
+// true</code></pre>
 </section>
-<section><h2 id="character-classes-solution">Character Classes &quot;Solution&quot;</h2>
-<pre><code class="lang-js">const reg = /[na]+/
+<section><h2 id="solution-with-character-class">&quot;Solution&quot; with Character Class</h2>
+<pre><code class="language-javascript">const reg = /[na]+/
 
 const isTheme = str =&gt; reg.test(str)
 
 isTheme(&quot;nanananananana Batman!&quot;)
-// =&gt; true
+// true
 
 isTheme(&quot;aaaaannnnnnnnn Batman!&quot;)
-// =&gt; true
-</code></pre>
+// true</code></pre>
 </section>
 <section><h2 id="groups">Groups</h2>
-<pre><code class="lang-js">const reg = /(na)+/
+<pre><code class="language-javascript">const reg = /(na)+/
 
 const isTheme = str =&gt; reg.test(str)
 
 isTheme(&quot;nanananananana Batman!&quot;)
-// =&gt; true
+// true
 
 isTheme(&quot;aaaaannnnnnnnn Batman!&quot;)
-// =&gt; false
-</code></pre>
+// false</code></pre>
 </section>
 <section><h2 id="alternation-in-groups">Alternation in Groups</h2>
-<pre><code class="lang-javascript">const reg = /???/g
+<pre><code class="language-javascript">const reg = /???/g
 
 const str = &quot;My brother has a ferret. My sister has a cat.&quot;
 str.replace(reg, &quot;family&quot;)
-// =&gt; &quot;My family has a ferret. My family has a cat.&quot;
-</code></pre>
+// &quot;My family has a ferret. My family has a cat.&quot;</code></pre>
 </section>
 <section><h2 id="alternation-in-groups">Alternation in Groups</h2>
-<pre><code class="lang-javascript">const reg = /(brother|sister)/g
+<pre><code class="language-javascript">const reg = /(brother|sister)/g
 
 const str = &quot;My brother has a ferret. My sister has a cat.&quot;
 str.replace(reg, &quot;family&quot;)
-// =&gt; &quot;My family has a ferret. My family has a cat.&quot;
-</code></pre>
+// &quot;My family has a ferret. My family has a cat.&quot;</code></pre>
 </section>
 <section><h2 id="more-than-1-way-to-match-a-query">More than 1 way to match a query</h2>
-<pre><code class="lang-javascript">const regCharacterClass = /grand[mp]a/g
-const regAlternationGroup = /grand(m|p)a/g
-const regAlternationWord - /(grandma|grandpa)/g
-</code></pre>
+<pre><code class="language-javascript">const regCharacterClass = /grand[mp]a/g
+const regAlternationLetter = /grand(m|p)a/g
+const regAlternationWord = /(grandma|grandpa)/g</code></pre>
 </section>
 <section><h2 id="backreferences">Backreferences</h2>
-<pre><code class="lang-javascript">const reg = /???/
+<pre><code class="language-javascript">const reg = /???/
 
 const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;bar-bar&quot;]
 strings.filter(str =&gt; reg.test(str))
-// =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
-</code></pre>
+// [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]</code></pre>
 </section>
 <section><h2 id="backreferences">Backreferences</h2>
-<pre><code class="lang-javascript">const reg = /(\w+)-\1/
+<pre><code class="language-javascript">const reg = /(\w+)-\1/
 
 const strings = [&quot;foo-foo&quot;, &quot;foo-bar&quot;, &quot;bar-bar&quot;]
 strings.filter(str =&gt; reg.test(str))
-// =&gt; [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]
-</code></pre>
+// [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]</code></pre>
 <aside class='notes'><p>Backreferences are 1-indexed</p>
 </aside></section>
 <section><h2 id="replace-interpolation">Replace Interpolation</h2>
-<pre><code class="lang-javascript">const str = &quot;My brother has a ferret.&quot;
+<pre><code class="language-javascript">const str = &quot;My brother has a ferret.&quot;
 str.replace(/(brother|sister)/g, &quot;???&quot;)
-// =&gt; &quot;My step-brother has a ferret.&quot;
-</code></pre>
+// &quot;My step-brother has a ferret.&quot;</code></pre>
 </section>
 <section><h2 id="replace-interpolation">Replace Interpolation</h2>
-<pre><code class="lang-javascript">const str = &quot;My brother has a ferret.&quot;
+<pre><code class="language-javascript">const str = &quot;My brother has a ferret.&quot;
 str.replace(/(brother|sister)/g, &quot;step-$1&quot;)
-// =&gt; &quot;My step-brother has a ferret.&quot;
-</code></pre>
+// &quot;My step-brother has a ferret.&quot;</code></pre>
 <aside class='notes'><p>Use <code>$1</code> instead of <code>\1</code></p>
 </aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
-<pre><code class="lang-js">const reg = /???/
+<pre><code class="language-javascript">const reg = /???/
 
 const str = &quot;Stripe costs 2.9% + $0.30&quot;
 const getPercentage = str =&gt; str.match(reg)[1]
 getPercentage(str)
-// =&gt; &quot;2.9&quot;
-</code></pre>
+// &quot;2.9&quot;</code></pre>
 <aside class='notes'><p>To include <code>%</code>, move it inside the capture group</p>
 </aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
-<pre><code class="lang-js">const reg = /(100|\d{1,2}(\.\d+)?)%/
+<pre><code class="language-javascript">const reg = /(100|\d{1,2}(\.\d+)?)%/
 
 const str = &quot;Stripe costs 2.9% + $0.30&quot;
 const getPercentage = str =&gt; str.match(reg)[1]
 getPercentage(str)
-// =&gt; &quot;2.9&quot;
-</code></pre>
+// &quot;2.9&quot;</code></pre>
 <aside class='notes'><p>To include <code>%</code>, move it inside the capture group</p>
-</aside></section>
-<section><h2 id="named-captures">Named Captures</h2>
-<pre><code class="lang-js">const reg = /(?&lt;day&gt;\d{1,2})\/(?&lt;month&gt;\d{1,2})\/(?&lt;year&gt;\d{4})/
-
-const str = &quot;Apollo 11 landed on the moon on 20/7/1969&quot;
-const extractDate = str =&gt; str.match(reg)
-extractDate(str).groups
-// =&gt; {day: &quot;20&quot;, month: &quot;7&quot;, year: &quot;1969&quot;}
-</code></pre>
-<aside class='notes'><ul>
-<li>New to ES2018</li>
-<li>In pattern with <code>\k&lt;year&gt;</code></li>
-<li>Backreference with `</li>
-</ul>
 </aside></section></section>
-<section><section><h2 id="javascript-is-weird">JavaScript is Weird</h2>
-<pre><code class="lang-javascript">&quot;bar baz&quot;.match(/ba\w/)    
-// =&gt; [ &quot;bar&quot;, index: 0, input: &quot;bar baz&quot;,
-//      groups: undefined ]
-&quot;bar baz&quot;.match(/ba(\w)/)  
-// =&gt; [ &quot;bar&quot;, &quot;r&quot;, index: 0 input &quot;bar baz&quot;, 
-//      groups: undefined ]
-&quot;bar baz&quot;.match(/ba\w/g)   // =&gt; [ &quot;bar&quot;, &quot;baz&quot; ]
-&quot;bar baz&quot;.match(/ba(\w)/g) // =&gt; [ &quot;bar&quot;, &quot;baz&quot; ]
-&quot;bar baz&quot;.match(/foo/)     // =&gt; null
-&quot;bar baz&quot;.match(/foo/g)    // =&gt; null
-</code></pre>
-<aside class='notes'><ul>
-<li>I hereafter omit <code>groups: undefined</code> which are for named groups</li>
-</ul>
-</aside></section>
-<section><h2 id="-exec-maintains-an-index"><code>.exec</code> maintains an index</h2>
-<pre><code class="lang-javascript">const allMatches = (reg, str) =&gt; {
-  let match
-  const output = []
-  while (match = reg.exec(str)) {
-    output.push(match);
-  }
-  return output
-}
-allMatches(/ba(\w)/g, &quot;bar baz&quot;) 
-// =&gt; [ [ &#39;bar&#39;, &#39;r&#39;, index: 0, input: &#39;bar baz&#39; ],
-//      [ &#39;baz&#39;, &#39;z&#39;, index: 4, input: &#39;bar baz&#39; ] ]
-</code></pre>
-</section></section>
 <section><section><h2 id="dot-all-the-things">Dot All the Things</h2>
-<pre><code class="lang-javascript">const extract_comment = /\/\*(.+)\*\//s
+<pre><code class="language-javascript">const extract_comment = /\/\*(.+)\*\//s
 const contains_comment = `this.bit.is.code()
 /* this is a comment
 this too */
 more.code()`
 contains_comment.match(extract_comment)[1].strip
-// =&gt; &quot;this is a comment\nthis too&quot;
+// &quot;this is a comment\nthis too&quot;
 
-const es3_extract_comment = /\/\*([\w\W]+)\*\//
-</code></pre>
-<p>This is what <a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">your</a> <a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">syntax</a> <a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">highlighter</a> <a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">is</a> <a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">doing</a>!</p>
+const es3_extract_comment = /\/\*([\w\W]+)\*\//</code></pre>
 </section>
-<section><h2 id="other-times-is-too-much">Other times <code>.</code> is too much</h2>
-<pre><code class="lang-javascript">const foo = &#39;foo=&quot;foo&quot;&#39;
+<section><h2 id="syntax-highlighting">Syntax Highlighting</h2>
+<ul>
+<li><a href="https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202">Vim</a></li>
+<li><a href="https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160">Emacs</a></li>
+<li><a href="https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756">Highlight.js</a> (including this talk)</li>
+<li><a href="https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70">Sublime</a></li>
+<li><a href="https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890">Atom</a></li>
+</ul>
+</section>
+<section><h2 id="other-times--is-too-much">Other times <code>.</code> is too much</h2>
+<pre><code class="language-javascript">const foo = &#39;foo=&quot;foo&quot;&#39;
 foo.match(/&quot;(.+)&quot;/g)
-// =&gt; [ [ &#39;&quot;foo&quot;&#39;, &quot;foo&quot;, index: 6, input: &#39;foo = &quot;foo&quot;&#39; ] ]
+// [ &#39;foo&#39; ]
 
 const foobar = &#39;foo=&quot;foo&quot;,bar=&quot;bar&quot;&#39;
-allMatches(/&quot;(.+)&quot;/g, foobar)
-// =&gt; [ [ &#39;&quot;foo&quot;, bar=&quot;bar&quot;&#39;,&#39;foo&quot;, bar=&quot;bar&#39;, index: 4,
-//      input: &#39;foo=&quot;foo&quot;, bar=&quot;bar&quot;&#39; ] ]
+foo.match(/&quot;(.+)&quot;/g, foobar)
+// [ &#39;foo&quot;, bar=&quot;bar&#39; ]
 
-allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
-// =&gt; [ [ &#39;&quot;foo&quot;&#39;, &quot;foo&quot;, index: 4, 
-//        input: &#39;foo=&quot;foo&quot;,bar=&quot;bar&quot;&#39; ],
-//      [ &#39;&quot;bar&quot;&#39;, &quot;bar&quot;, index: 14, 
-//        input: &#39;foo=&quot;foo&quot;,bar=&quot;bar&quot;&#39; ] ]
-</code></pre>
+foo.match(/&quot;([^&quot;]+)&quot;/g, foobar)
+// [ &#39;foo&#39;,
+//   &#39;bar&#39; ]</code></pre>
 <aside class='notes'><ul>
 <li>Think about the interpretter</li>
 <li>You can make the regex engine lazy with <code>?</code></li>
+<li>Quirk in js engine means this is a lie</li>
 </ul>
 </aside></section>
 <section><p><img src="./images/regex_xword_4.svg" alt="Crossword 4"></p>
@@ -470,14 +413,7 @@ allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
 <section><p><img src="./images/regex_xword_4_solution.svg" alt="Crossword 4 Solution"></p>
 </section></section>
 <section><section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
-<ul>
-<li><a href="http://rubular.com">Rubular</a> (Ruby)</li>
-<li><a href="http://www.gethifi.com/tools/regex">hifi RegExp Tool</a> (JavaScript)</li>
-</ul>
-</section>
-<section><h2 id="matching-email-addresses">Matching Email Addresses</h2>
-<pre><code class="lang-regex">/[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i
-</code></pre>
+<pre><code class="language-regex">/[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i</code></pre>
 <table>
 <thead>
 <tr>
@@ -485,8 +421,7 @@ allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
 <th>Meaning</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>[\w.%+-]+</code></td>
 <td>1+ of: letter, number, <code>.</code>, <code>_</code>, <code>%</code>, <code>+</code>, <code>-</code></td>
 </tr>
@@ -510,53 +445,49 @@ allMatches(/&quot;([^&quot;]+)&quot;/g, foobar)
 <td><code>i</code></td>
 <td>Case Insensitive</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <aside class='notes'><ul>
 <li>Escaping metacharacters was unnecessary inside char class.</li>
 <li>Not uncommon for regex to reject my personal email.</li>
 </ul>
 </aside></section>
 <section><h2 id="matching-the-whole-string">Matching the Whole String</h2>
-<pre><code class="lang-javascript">const codeInjection = 
+<pre><code class="language-javascript">const codeInjection =
   &quot;&lt;script&gt;alert(&#39;uh oh&#39;)&lt;/script&gt;\nfoo@bar.com&quot;
 
-const containsEmail = str =&gt; 
+const containsEmail = str =&gt;
   /[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(str)
 containsEmail(injection) // true
 
 const containsOnlyEmail = str =&gt;
   /^[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(str)
-containsOnlyEmail(injection) // false
-</code></pre>
+containsOnlyEmail(injection) // false</code></pre>
 <aside class='notes'><ul>
 <li>Ruby treats as multi-line by default -- use <code>\A</code> &amp; <code>\z</code>.</li>
 <li>If you <em>want</em> that behavior, use multiline flag <code>m</code>.</li>
 </ul>
 </aside></section></section>
-<section><section><h2 id="-s-various-meanings"><code>^</code>&#39;s various meanings</h2>
-<pre><code class="lang-javascript">const isFirstCharacterVowel = str =&gt; /^[aeiou]/i.test(str)
-const containsNonVowel = str =&gt; /[^aeiou]/i
-</code></pre>
+<section><section><h2 id="s-various-meanings"><code>^</code>&#39;s various meanings</h2>
+<pre><code class="language-javascript">const isFirstCharacterVowel = str =&gt; /^[aeiou]/i.test(str)
+const containsNonVowel = str =&gt; /[^aeiou]/i.test(str)</code></pre>
 <aside class='notes'><p><code>?</code> is also tricky</p>
 </aside></section>
-<section><h2 id="-">\ ^ $ . | ? * + ( ) [ ] { }</h2>
+<section><h2 id="-------------">\ ^ $ . | ? * + ( ) [ ] { }</h2>
 <aside class='notes'><ul>
 <li>Over-escaping not a problem</li>
 <li>You <em>may</em> escape in character classes.</li>
 </ul>
 </aside></section>
 <section><h2 id="regex-often-fail-silently">Regex Often Fail Silently</h2>
-<pre><code class="lang-javascript">const reg =  /[abc]{2}[xyz]+/
+<pre><code class="language-javascript">const reg =  /[abc]{2}[xyz]+/
 reg.test(&quot;cbz&quot;)     // true
 reg.test(&quot;axx&quot;)     // false
 reg.test(&quot;a&quot;)       // false
 
-const typo = /[abc}{2}[xyz]+/
-</code></pre>
+const typo = /[abc}{2}[xyz]+/</code></pre>
 </section>
 <section><h2 id="regex-often-fail-silently">Regex Often Fail Silently</h2>
-<pre><code class="lang-javascript">const reg =  /[abc]+[xyz]+/
+<pre><code class="language-javascript">const reg =  /[abc]+[xyz]+/
 reg.test(&quot;cbz&quot;)     // true
 reg.test(&quot;axx&quot;)     // false
 reg.test(&quot;a&quot;)       // false
@@ -566,8 +497,7 @@ typo.test(&quot;cbz&quot;)    // true
 typo.test(&quot;axx&quot;)    // true
 typo.test(&quot;a&quot;)      // true
 typo.test(&quot;[&quot;)      // true
-typo.test(&quot;2&quot;)      // true
-</code></pre>
+typo.test(&quot;2&quot;)      // true</code></pre>
 <aside class='notes'><p>Test the negatives</p>
 </aside></section></section>
 <section><section><h2 id="where-to-use-regex">Where to use RegEx</h2>
@@ -586,10 +516,11 @@ typo.test(&quot;2&quot;)      // true
 <section><h2 id="chrome-via-deepsearch">Chrome via DeepSearch</h2>
 <p><img src="images/deep_search.png" alt="Deep Search"></p>
 </section>
-<section><pre><code class="lang-plaintext">GREP(1)                                       User Commands
+<section><h2 id="command-line">Command Line</h2>
+<pre><code class="language-plaintext">GREP(1)                                       User Commands
 
 NAME
-      grep, egrep, fgrep, rgrep - 
+      grep, egrep, fgrep, rgrep -
         print lines matching a pattern
 
 SYNOPSIS
@@ -598,9 +529,8 @@ SYNOPSIS
       grep [OPTIONS] -f FILE ... [FILE...]
 
 DESCRIPTION
-      grep  searches  for PATTERN in each FILE.  A FILE of 
-      “-” stands for standard input.  If no FILE is given,
-</code></pre>
+      grep  searches  for PATTERN in each FILE.  A FILE of
+      “-” stands for standard input.  If no FILE is given,</code></pre>
 </section>
 <section><p><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"><img src="images/parsing_html_with_regex.png" alt="Book Cover"></a></p>
 </section></section>
@@ -616,6 +546,13 @@ DESCRIPTION
 </li>
 <li>Basics are ~universal across languages</li>
 <li>Some advanced features vary (e.g., lookarounds, named references)</li>
+<li>Javascript methods for global regex are a mess</li>
+</ul>
+</section>
+<section><h2 id="tools-for-writing-regex">Tools for Writing Regex</h2>
+<ul>
+<li><a href="http://rubular.com">Rubular</a> (Ruby)</li>
+<li><a href="http://www.gethifi.com/tools/regex">hifi RegExp Tool</a> (JavaScript)</li>
 </ul>
 </section>
 <section><h2 id="regex-crosswords">Regex Crosswords</h2>
@@ -647,6 +584,8 @@ DESCRIPTION
 <p>Engineer at Stripe</p>
 <p><a href="mailto:henry@stripe.com">henry@stripe.com</a></p>
 <p><a href="mailto:henry@isagoddamn.ninja">henry@isagoddamn.ninja</a></p>
+</section>
+<section><h2 id="questions">Questions</h2>
 </section>
 <section><p><img src="./images/regex_xword_5.svg" alt="Crossword 5"></p>
 </section>

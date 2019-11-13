@@ -11,8 +11,6 @@ charset: "utf-8"
 # Regex 101
 
 <p style="text-align: center;">Henry Marshall</p>
-<p style="text-align: center;">SEM.js</p>
-<p style="text-align: center;">2019-03-11</p>
 
 ==========
 
@@ -21,6 +19,7 @@ charset: "utf-8"
 - Powerful and Concise
 - Truly cross-platform
 - Will be around forever
+- Easy to learn
 
 ----------
 
@@ -49,11 +48,11 @@ const windows_str = "foo\r\nbar"
 ```javascript
 const unix_str = "foo\nbar"
 unix_str.split("\n")
-// => [ 'foo', 'bar' ]
+// [ 'foo', 'bar' ]
 
 const windows_str = "foo\r\nbar"
 windows_str.split("\n")
-// => [ 'foo\r', 'bar' ]
+// [ 'foo\r', 'bar' ]
 ```
 
 ----------
@@ -62,7 +61,7 @@ windows_str.split("\n")
 
 | Pattern   | Description             | Matches                      |
 | --------- | ----------------------- | ---------------------------- |
-| `a?`      | One or Zero 'a'         | '' 'a'                       |
+| `a?`      | Zero or One 'a'         | '' 'a'                       |
 | `a*`      | Zero or More 'a'        | '' 'a' 'aa' 'aaa' 'aaaa'...  |
 | `a+`      | One or More 'a'         | 'a' 'aa' 'aaa' 'aaaa'...     |
 | `a{3}`    | Exactly three 'a'       | 'aaa'                        |
@@ -79,11 +78,11 @@ const reg = /\r?\n/
 
 const unix_str = "foo\nbar"
 unix_str.split(reg)
-// => [ 'foo', 'bar' ]
+// [ 'foo', 'bar' ]
 
 const windows_str = "foo\r\nbar"
 windows_str.split(reg)
-// => [ 'foo', 'bar' ]
+// [ 'foo', 'bar' ]
 ```
 
 ----------
@@ -94,9 +93,17 @@ windows_str.split(reg)
 
 ![Crossword 1 Solution](./images/regex_xword_1_solution.svg)
 
-----------
+==========
 
 ## The dot character
+
+```javascript
+const reg = /ba./
+
+reg.test("foo") // false
+reg.test("bar") // true
+reg.test("baz") // true
+```
 
 ----------
 
@@ -127,11 +134,12 @@ const reg = /grand.a/
 
 const str = "My grandma has a cat. My grandpa has a dog."
 str.replace(reg, "family")
+// "My family has a cat. My family has a dog."
 
 reg.test(str)
 // true
 
-reg.test("My grandxa has a dog")
+reg.test("My grandxa has a hamster")
 // true
 ```
 
@@ -144,12 +152,12 @@ const reg = /grand[mp]a/g
 
 const str = "My grandma has a cat. My grandpa has a dog."
 str.replace(reg, "family")
-// => "My family has a cat. My family has a dog."
+// "My family has a cat. My family has a dog."
 
 reg.test(str)
 // true
 
-reg.test("My grandxa has a dog")
+reg.test("My grandxa has a hamster")
 // false
 ```
 
@@ -172,24 +180,30 @@ Note: I can (and did) use `\d` inside another character class!
 
 ## Negation
 
-```js
+```javascript
 const reg = /???/
 
 const containsNonVowel = str => reg.test(str)
 containsNonVowel("foo")
-// => true
+// true
+
+containsNonVowel("AAAAAAAA")
+// false
 ```
 
 ----------
 
 ## Negation
 
-```js
-const reg = /[^aeiou]/
+```javascript
+const reg = /[^aeiou]/i
 
 const containsNonVowel = str => reg.test(str)
 containsNonVowel("foo")
-// => true
+// true
+
+containsNonVowel("AAAAAAAA")
+// false
 ```
 
 ----------
@@ -226,45 +240,45 @@ containsNonVowel("foo")
 
 ## Groups
 
-```js
+```javascript
 const reg = /???/
 
 const isTheme = str => reg.test(str)
 
 isTheme("nanananananana Batman!")
-// => true
+// true
 ```
 
 ----------
 
-## Character Classes "Solution"
+## "Solution" with Character Class
 
-```js
+```javascript
 const reg = /[na]+/
 
 const isTheme = str => reg.test(str)
 
 isTheme("nanananananana Batman!")
-// => true
+// true
 
 isTheme("aaaaannnnnnnnn Batman!")
-// => true
+// true
 ```
 
 ----------
 
 ## Groups
 
-```js
+```javascript
 const reg = /(na)+/
 
 const isTheme = str => reg.test(str)
 
 isTheme("nanananananana Batman!")
-// => true
+// true
 
 isTheme("aaaaannnnnnnnn Batman!")
-// => false
+// false
 ```
 
 ----------
@@ -276,7 +290,7 @@ const reg = /???/g
 
 const str = "My brother has a ferret. My sister has a cat."
 str.replace(reg, "family")
-// => "My family has a ferret. My family has a cat."
+// "My family has a ferret. My family has a cat."
 ```
 
 ----------
@@ -288,7 +302,7 @@ const reg = /(brother|sister)/g
 
 const str = "My brother has a ferret. My sister has a cat."
 str.replace(reg, "family")
-// => "My family has a ferret. My family has a cat."
+// "My family has a ferret. My family has a cat."
 ```
 
 ----------
@@ -297,8 +311,8 @@ str.replace(reg, "family")
 
 ```javascript
 const regCharacterClass = /grand[mp]a/g
-const regAlternationGroup = /grand(m|p)a/g
-const regAlternationWord - /(grandma|grandpa)/g
+const regAlternationLetter = /grand(m|p)a/g
+const regAlternationWord = /(grandma|grandpa)/g
 ```
 
 ----------
@@ -310,7 +324,7 @@ const reg = /???/
 
 const strings = ["foo-foo", "foo-bar", "bar-bar"]
 strings.filter(str => reg.test(str))
-// => [ "foo-foo", "bar-bar" ]
+// [ "foo-foo", "bar-bar" ]
 ```
 
 ----------
@@ -322,7 +336,7 @@ const reg = /(\w+)-\1/
 
 const strings = ["foo-foo", "foo-bar", "bar-bar"]
 strings.filter(str => reg.test(str))
-// => [ "foo-foo", "bar-bar" ]
+// [ "foo-foo", "bar-bar" ]
 ```
 
 Note: Backreferences are 1-indexed
@@ -334,9 +348,8 @@ Note: Backreferences are 1-indexed
 ```javascript
 const str = "My brother has a ferret."
 str.replace(/(brother|sister)/g, "???")
-// => "My step-brother has a ferret."
+// "My step-brother has a ferret."
 ```
-
 
 ----------
 
@@ -345,7 +358,7 @@ str.replace(/(brother|sister)/g, "???")
 ```javascript
 const str = "My brother has a ferret."
 str.replace(/(brother|sister)/g, "step-$1")
-// => "My step-brother has a ferret."
+// "My step-brother has a ferret."
 ```
 
 Note: Use `$1` instead of `\1`
@@ -354,13 +367,13 @@ Note: Use `$1` instead of `\1`
 
 ## Capture Groups
 
-```js
+```javascript
 const reg = /???/
 
 const str = "Stripe costs 2.9% + $0.30"
 const getPercentage = str => str.match(reg)[1]
 getPercentage(str)
-// => "2.9"
+// "2.9"
 ```
 
 Note: To include `%`, move it inside the capture group
@@ -369,73 +382,16 @@ Note: To include `%`, move it inside the capture group
 
 ## Capture Groups
 
-```js
+```javascript
 const reg = /(100|\d{1,2}(\.\d+)?)%/
 
 const str = "Stripe costs 2.9% + $0.30"
 const getPercentage = str => str.match(reg)[1]
 getPercentage(str)
-// => "2.9"
+// "2.9"
 ```
 
 Note: To include `%`, move it inside the capture group
-
-
-----------
-
-## Named Captures
-
-```js
-const reg = /(?<day>\d{1,2})\/(?<month>\d{1,2})\/(?<year>\d{4})/
-
-const str = "Apollo 11 landed on the moon on 20/7/1969"
-const extractDate = str => str.match(reg)
-extractDate(str).groups
-// => {day: "20", month: "7", year: "1969"}
-```
-
-Note: 
-- New to ES2018
-- In pattern with `\k<year>`
-- Backreference with `
-
-==========
-
-## JavaScript is Weird
-
-```javascript
-"bar baz".match(/ba\w/)    
-// => [ "bar", index: 0, input: "bar baz",
-//      groups: undefined ]
-"bar baz".match(/ba(\w)/)  
-// => [ "bar", "r", index: 0 input "bar baz", 
-//      groups: undefined ]
-"bar baz".match(/ba\w/g)   // => [ "bar", "baz" ]
-"bar baz".match(/ba(\w)/g) // => [ "bar", "baz" ]
-"bar baz".match(/foo/)     // => null
-"bar baz".match(/foo/g)    // => null
-```
-
-Note: 
-- I hereafter omit `groups: undefined` which are for named groups
-
-----------
-
-## `.exec` maintains an index
-
-```javascript
-const allMatches = (reg, str) => {
-  let match
-  const output = []
-  while (match = reg.exec(str)) {
-    output.push(match);
-  }
-  return output
-}
-allMatches(/ba(\w)/g, "bar baz") 
-// => [ [ 'bar', 'r', index: 0, input: 'bar baz' ],
-//      [ 'baz', 'z', index: 4, input: 'bar baz' ] ]
-```
 
 ==========
 
@@ -448,12 +404,21 @@ const contains_comment = `this.bit.is.code()
 this too */
 more.code()`
 contains_comment.match(extract_comment)[1].strip
-// => "this is a comment\nthis too"
+// "this is a comment\nthis too"
 
 const es3_extract_comment = /\/\*([\w\W]+)\*\//
 ```
 
-This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160) [syntax](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) [highlighter](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202) [is](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70) [doing](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)!
+----------
+
+## Syntax Highlighting
+
+- [Vim](https://github.com/pangloss/vim-javascript/blob/master/syntax/javascript.vim#L202)
+- [Emacs](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L6160)
+- [Highlight.js](https://github.com/isagalaev/highlight.js/blob/master/src/highlight.js#L756) (including this talk)
+- [Sublime](https://github.com/Benvie/JavaScriptNext.tmLanguage/blob/master/JavaScriptNext.tmLanguage#L70)
+- [Atom](https://github.com/atom/language-javascript/blob/master/grammars/javascript.cson#L1890)
+
 
 ----------
 
@@ -462,23 +427,21 @@ This is what [your](https://github.com/mooz/js2-mode/blob/master/js2-mode.el#L61
 ```javascript
 const foo = 'foo="foo"'
 foo.match(/"(.+)"/g)
-// => [ [ '"foo"', "foo", index: 6, input: 'foo = "foo"' ] ]
+// [ 'foo' ]
 
 const foobar = 'foo="foo",bar="bar"'
-allMatches(/"(.+)"/g, foobar)
-// => [ [ '"foo", bar="bar"','foo", bar="bar', index: 4,
-//      input: 'foo="foo", bar="bar"' ] ]
+foo.match(/"(.+)"/g, foobar)
+// [ 'foo", bar="bar' ]
 
-allMatches(/"([^"]+)"/g, foobar)
-// => [ [ '"foo"', "foo", index: 4, 
-//        input: 'foo="foo",bar="bar"' ],
-//      [ '"bar"', "bar", index: 14, 
-//        input: 'foo="foo",bar="bar"' ] ]
+foo.match(/"([^"]+)"/g, foobar)
+// [ 'foo',
+//   'bar' ]
 ```
 
-Note: 
+Note:
 - Think about the interpretter
 - You can make the regex engine lazy with `?`
+- Quirk in js engine means this is a lie
 
 ----------
 
@@ -489,13 +452,6 @@ Note:
 ![Crossword 4 Solution](./images/regex_xword_4_solution.svg)
 
 ==========
-
-## Matching Email Addresses
-
-- [Rubular](http://rubular.com) (Ruby)
-- [hifi RegExp Tool](http://www.gethifi.com/tools/regex) (JavaScript)
-
-----------
 
 ## Matching Email Addresses
 
@@ -512,7 +468,7 @@ Note:
 | `[A-Z]{2,}`      | Two or more letters                             |
 | `i`              | Case Insensitive                                |
 
-Note: 
+Note:
 - Escaping metacharacters was unnecessary inside char class.
 - Not uncommon for regex to reject my personal email.
 
@@ -521,10 +477,10 @@ Note:
 ## Matching the Whole String
 
 ```javascript
-const codeInjection = 
+const codeInjection =
   "<script>alert('uh oh')</script>\nfoo@bar.com"
 
-const containsEmail = str => 
+const containsEmail = str =>
   /[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(str)
 containsEmail(injection) // true
 
@@ -533,7 +489,7 @@ const containsOnlyEmail = str =>
 containsOnlyEmail(injection) // false
 ```
 
-Note: 
+Note:
 - Ruby treats as multi-line by default -- use `\A` & `\z`.
 - If you *want* that behavior, use multiline flag `m`.
 
@@ -543,7 +499,7 @@ Note:
 
 ```javascript
 const isFirstCharacterVowel = str => /^[aeiou]/i.test(str)
-const containsNonVowel = str => /[^aeiou]/i
+const containsNonVowel = str => /[^aeiou]/i.test(str)
 ```
 
 Note: `?` is also tricky
@@ -618,11 +574,13 @@ Note: Your code, your config files, your editor
 
 ----------
 
+## Command Line
+
 ```plaintext
 GREP(1)                                       User Commands
 
 NAME
-      grep, egrep, fgrep, rgrep - 
+      grep, egrep, fgrep, rgrep -
         print lines matching a pattern
 
 SYNOPSIS
@@ -631,7 +589,7 @@ SYNOPSIS
       grep [OPTIONS] -f FILE ... [FILE...]
 
 DESCRIPTION
-      grep  searches  for PATTERN in each FILE.  A FILE of 
+      grep  searches  for PATTERN in each FILE.  A FILE of
       “-” stands for standard input.  If no FILE is given,
 ```
 
@@ -653,6 +611,14 @@ DESCRIPTION
   - `%1 %2` (Clojure)
 - Basics are ~universal across languages
 - Some advanced features vary (e.g., lookarounds, named references)
+- Javascript methods for global regex are a mess
+
+----------
+
+## Tools for Writing Regex
+
+- [Rubular](http://rubular.com) (Ruby)
+- [hifi RegExp Tool](http://www.gethifi.com/tools/regex) (JavaScript)
 
 ----------
 
@@ -694,8 +660,13 @@ henry@isagoddamn.ninja
 
 ----------
 
+## Questions
+
+----------
+
 ![Crossword 5](./images/regex_xword_5.svg)
 
 ----------
 
 ![Crossword 5 Solution](./images/regex_xword_5_solution.svg)
+
