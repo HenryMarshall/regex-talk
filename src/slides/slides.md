@@ -343,28 +343,6 @@ Note: Backreferences are 1-indexed
 
 ----------
 
-## Replace Interpolation
-
-```javascript
-const str = "My brother has a ferret."
-str.replace(/(brother|sister)/g, "???")
-// "My step-brother has a ferret."
-```
-
-----------
-
-## Replace Interpolation
-
-```javascript
-const str = "My brother has a ferret."
-str.replace(/(brother|sister)/g, "step-$1")
-// "My step-brother has a ferret."
-```
-
-Note: Use `$1` instead of `\1`
-
-----------
-
 ## Capture Groups
 
 ```javascript
@@ -548,57 +526,6 @@ Note: Test the negatives
 
 ==========
 
-## Where to use RegEx
-
-Note: Your code, your config files, your editor
-
-----------
-
-## Your word processor
-
-![Google Docs](images/google_docs.png)
-
-----------
-
-## PDF
-
-- [pdfgrep](https://pdfgrep.org/) Cross Platform CLI (FOSS)
-- [dnGrep](http://dngrep.github.io/) GUI for Windows (FOSS)
-- [FileLocator Pro](https://www.mythicsoft.com/filelocatorpro/) GUI for Windows ($60)
-
-----------
-
-## Chrome via DeepSearch
-
-![Deep Search](images/deep_search.png)
-
-----------
-
-## Command Line
-
-```plaintext
-GREP(1)                                       User Commands
-
-NAME
-      grep, egrep, fgrep, rgrep -
-        print lines matching a pattern
-
-SYNOPSIS
-      grep [OPTIONS] PATTERN [FILE...]
-      grep [OPTIONS] -e PATTERN ... [FILE...]
-      grep [OPTIONS] -f FILE ... [FILE...]
-
-DESCRIPTION
-      grep  searches  for PATTERN in each FILE.  A FILE of
-      “-” stands for standard input.  If no FILE is given,
-```
-
-----------
-
-[![Book Cover](images/parsing_html_with_regex.png)](https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags)
-
-==========
-
 ## Wrapping Up
 
 ----------
@@ -615,37 +542,29 @@ DESCRIPTION
 
 ----------
 
-## Tools for Writing Regex
+## Where to use RegEx
 
-- [Rubular](http://rubular.com) (Ruby)
-- [hifi RegExp Tool](http://www.gethifi.com/tools/regex) (JavaScript)
-
-----------
-
-## Regex Crosswords
-
-- [Original MIT Crossword](https://gregable.com/p/regexp-puzzle.html)
-- [RegexCrossword.com](https://regexcrossword.com/) Web App
-- [Regex Xword](https://play.google.com/store/apps/details?id=com.ilit.regexxword&hl=en_US) Android App
+Note: Your code, your config files, your editor
 
 ----------
 
-## Next Steps
+## Your word processor
 
-- [Unicode](http://2ality.com/2017/07/regexp-unicode-property-escapes.html)
-- [Non-Capturing Groups](https://stackoverflow.com/a/3513858/1884044)
-- [Laziness](https://www.regular-expressions.info/repeat.html)
-- [Lookarounds](https://www.regular-expressions.info/lookaround.html)
+![Google Docs](images/google_docs.png)
+
+----------
+
+## Chrome via DeepSearch
+
+![Deep Search](images/deep_search.png)
 
 ----------
 
 ## Resources
 
-- Slides: [http://bit.ly/regex101](http://bit.ly/regex101)
+- Slides: [http://bit.ly/regex101](http://henrymarshall.github.io/regex-talk)
 - Handout: [http://bit.ly/regex101-cheatsheet](http://bit.ly/regex101-cheatsheet)
-- [Regular-Expressions.info](https://www.regular-expressions.info/)
-- [ES2018 Regex changes in SmashingMagazine](https://www.smashingmagazine.com/2019/02/regexp-features-regular-expressions/)
-- [Jeff Atwood's ode to regex](https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/)
+- [RegexCrossword.com](https://regexcrossword.com/) Web App
 - [github.com/aloisdg/awesome-regex](https://github.com/aloisdg/awesome-regex)
 
 ----------

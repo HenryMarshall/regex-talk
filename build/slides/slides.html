@@ -341,17 +341,6 @@ strings.filter(str =&gt; reg.test(str))
 // [ &quot;foo-foo&quot;, &quot;bar-bar&quot; ]</code></pre>
 <aside class='notes'><p>Backreferences are 1-indexed</p>
 </aside></section>
-<section><h2 id="replace-interpolation">Replace Interpolation</h2>
-<pre><code class="language-javascript">const str = &quot;My brother has a ferret.&quot;
-str.replace(/(brother|sister)/g, &quot;???&quot;)
-// &quot;My step-brother has a ferret.&quot;</code></pre>
-</section>
-<section><h2 id="replace-interpolation">Replace Interpolation</h2>
-<pre><code class="language-javascript">const str = &quot;My brother has a ferret.&quot;
-str.replace(/(brother|sister)/g, &quot;step-$1&quot;)
-// &quot;My step-brother has a ferret.&quot;</code></pre>
-<aside class='notes'><p>Use <code>$1</code> instead of <code>\1</code></p>
-</aside></section>
 <section><h2 id="capture-groups">Capture Groups</h2>
 <pre><code class="language-javascript">const reg = /???/
 
@@ -500,40 +489,6 @@ typo.test(&quot;[&quot;)      // true
 typo.test(&quot;2&quot;)      // true</code></pre>
 <aside class='notes'><p>Test the negatives</p>
 </aside></section></section>
-<section><section><h2 id="where-to-use-regex">Where to use RegEx</h2>
-<aside class='notes'><p>Your code, your config files, your editor</p>
-</aside></section>
-<section><h2 id="your-word-processor">Your word processor</h2>
-<p><img src="images/google_docs.png" alt="Google Docs"></p>
-</section>
-<section><h2 id="pdf">PDF</h2>
-<ul>
-<li><a href="https://pdfgrep.org/">pdfgrep</a> Cross Platform CLI (FOSS)</li>
-<li><a href="http://dngrep.github.io/">dnGrep</a> GUI for Windows (FOSS)</li>
-<li><a href="https://www.mythicsoft.com/filelocatorpro/">FileLocator Pro</a> GUI for Windows ($60)</li>
-</ul>
-</section>
-<section><h2 id="chrome-via-deepsearch">Chrome via DeepSearch</h2>
-<p><img src="images/deep_search.png" alt="Deep Search"></p>
-</section>
-<section><h2 id="command-line">Command Line</h2>
-<pre><code class="language-plaintext">GREP(1)                                       User Commands
-
-NAME
-      grep, egrep, fgrep, rgrep -
-        print lines matching a pattern
-
-SYNOPSIS
-      grep [OPTIONS] PATTERN [FILE...]
-      grep [OPTIONS] -e PATTERN ... [FILE...]
-      grep [OPTIONS] -f FILE ... [FILE...]
-
-DESCRIPTION
-      grep  searches  for PATTERN in each FILE.  A FILE of
-      “-” stands for standard input.  If no FILE is given,</code></pre>
-</section>
-<section><p><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags"><img src="images/parsing_html_with_regex.png" alt="Book Cover"></a></p>
-</section></section>
 <section><section><h2 id="wrapping-up">Wrapping Up</h2>
 </section>
 <section><h2 id="flavors-of-regex">Flavors of Regex</h2>
@@ -549,34 +504,20 @@ DESCRIPTION
 <li>Javascript methods for global regex are a mess</li>
 </ul>
 </section>
-<section><h2 id="tools-for-writing-regex">Tools for Writing Regex</h2>
-<ul>
-<li><a href="http://rubular.com">Rubular</a> (Ruby)</li>
-<li><a href="http://www.gethifi.com/tools/regex">hifi RegExp Tool</a> (JavaScript)</li>
-</ul>
+<section><h2 id="where-to-use-regex">Where to use RegEx</h2>
+<aside class='notes'><p>Your code, your config files, your editor</p>
+</aside></section>
+<section><h2 id="your-word-processor">Your word processor</h2>
+<p><img src="images/google_docs.png" alt="Google Docs"></p>
 </section>
-<section><h2 id="regex-crosswords">Regex Crosswords</h2>
-<ul>
-<li><a href="https://gregable.com/p/regexp-puzzle.html">Original MIT Crossword</a></li>
-<li><a href="https://regexcrossword.com/">RegexCrossword.com</a> Web App</li>
-<li><a href="https://play.google.com/store/apps/details?id=com.ilit.regexxword&amp;hl=en_US">Regex Xword</a> Android App</li>
-</ul>
-</section>
-<section><h2 id="next-steps">Next Steps</h2>
-<ul>
-<li><a href="http://2ality.com/2017/07/regexp-unicode-property-escapes.html">Unicode</a></li>
-<li><a href="https://stackoverflow.com/a/3513858/1884044">Non-Capturing Groups</a></li>
-<li><a href="https://www.regular-expressions.info/repeat.html">Laziness</a></li>
-<li><a href="https://www.regular-expressions.info/lookaround.html">Lookarounds</a></li>
-</ul>
+<section><h2 id="chrome-via-deepsearch">Chrome via DeepSearch</h2>
+<p><img src="images/deep_search.png" alt="Deep Search"></p>
 </section>
 <section><h2 id="resources">Resources</h2>
 <ul>
-<li>Slides: <a href="http://bit.ly/regex101">http://bit.ly/regex101</a></li>
+<li>Slides: <a href="http://henrymarshall.github.io/regex-talk">http://bit.ly/regex101</a></li>
 <li>Handout: <a href="http://bit.ly/regex101-cheatsheet">http://bit.ly/regex101-cheatsheet</a></li>
-<li><a href="https://www.regular-expressions.info/">Regular-Expressions.info</a></li>
-<li><a href="https://www.smashingmagazine.com/2019/02/regexp-features-regular-expressions/">ES2018 Regex changes in SmashingMagazine</a></li>
-<li><a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Jeff Atwood&#39;s ode to regex</a></li>
+<li><a href="https://regexcrossword.com/">RegexCrossword.com</a> Web App</li>
 <li><a href="https://github.com/aloisdg/awesome-regex">github.com/aloisdg/awesome-regex</a></li>
 </ul>
 </section>
