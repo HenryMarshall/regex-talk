@@ -167,8 +167,14 @@ Note: The `g` flag makes the regex global.
 
 ## Regex Are Like Lego
 
+```javascript
+const reg = /[abc]{4}/
 
-
+reg.test("abba") // true
+reg.test("babc") // true
+reg.test("cbab") // true
+reg.test("abcd") // false
+```
 
 ----------
 

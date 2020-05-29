@@ -175,6 +175,12 @@ reg.test(&quot;My grandxa has a hamster&quot;)
 <aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
 </aside></section>
 <section><h2 id="regex-are-like-lego">Regex Are Like Lego</h2>
+<pre><code class="language-javascript">const reg = /[abc]{4}/
+
+reg.test(&quot;abba&quot;) // true
+reg.test(&quot;babc&quot;) // true
+reg.test(&quot;cbab&quot;) // true
+reg.test(&quot;abcd&quot;) // false</code></pre>
 </section>
 <section><h2 id="shorthand-character-class">Shorthand Character Class</h2>
 <table>
