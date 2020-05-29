@@ -110,7 +110,7 @@ windows_str.split(&quot;\n&quot;)
 <tr>
 <td><code>a{2,4}</code></td>
 <td>Two to four &#39;a&#39;</td>
-<td>&#39;aa&#39; &#39;aaaa&#39; &#39;aaaa&#39;</td>
+<td>&#39;aa&#39; &#39;aaa&#39; &#39;aaaa&#39;</td>
 </tr>
 </tbody></table>
 <aside class='notes'><p>Omitting the first and second numbers implicitly means 0 and infinite respectively.</p>
@@ -148,7 +148,7 @@ const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)</code></pre>
 </section>
 <section><h2 id="solution-with-">&quot;Solution&quot; with .</h2>
-<pre><code class="language-javascript">const reg = /grand.a/
+<pre><code class="language-javascript">const reg = /grand.a/g
 
 const str = &quot;My grandma has a cat. My grandpa has a dog.&quot;
 str.replace(reg, &quot;family&quot;)
@@ -174,6 +174,8 @@ reg.test(&quot;My grandxa has a hamster&quot;)
 // false</code></pre>
 <aside class='notes'><p>The <code>g</code> flag makes the regex global.</p>
 </aside></section>
+<section><h2 id="regex-are-like-lego">Regex Are Like Lego</h2>
+</section>
 <section><h2 id="shorthand-character-class">Shorthand Character Class</h2>
 <table>
 <thead>

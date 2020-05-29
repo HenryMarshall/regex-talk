@@ -65,7 +65,7 @@ windows_str.split("\n")
 | `a*`      | Zero or More 'a'        | '' 'a' 'aa' 'aaa' 'aaaa'...  |
 | `a+`      | One or More 'a'         | 'a' 'aa' 'aaa' 'aaaa'...     |
 | `a{3}`    | Exactly three 'a'       | 'aaa'                        |
-| `a{2,4}`  | Two to four 'a'         | 'aa' 'aaaa' 'aaaa'           |
+| `a{2,4}`  | Two to four 'a'         | 'aa' 'aaa' 'aaaa'            |
 
 Note: Omitting the first and second numbers implicitly means 0 and infinite respectively.
 
@@ -130,7 +130,7 @@ str.replace(reg, "family")
 ## "Solution" with .
 
 ```javascript
-const reg = /grand.a/
+const reg = /grand.a/g
 
 const str = "My grandma has a cat. My grandpa has a dog."
 str.replace(reg, "family")
@@ -162,6 +162,13 @@ reg.test("My grandxa has a hamster")
 ```
 
 Note: The `g` flag makes the regex global.
+
+----------
+
+## Regex Are Like Lego
+
+
+
 
 ----------
 
