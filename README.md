@@ -15,7 +15,7 @@
 | `^`    | Start of String *or* Negation in Character Class   |
 | `$`    | End of String                                      |
 | `.`    | Any Character (Except Newlines)                    |
-| `|`    | Alternation in Groups                              |
+| `\|`   | Alternation in Groups                              |
 | `?`    | Zero or One *or* Lazy Mode *or* Lookarounds & more |
 | `*`    | Zero or More                                       |
 | `+`    | One or More                                        |
